@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciar Perfil - TCC Innovation</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ftccinnova5019back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Header -->
+    <header class="bg-surface shadow-elevation-sm border-b border-secondary-200 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="challenge_browse_and_search.html" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-semibold text-text-primary">TCC Innovation</span>
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="challenge_browse_and_search.html" class="text-text-secondary hover:text-primary transition-colors">
+                        Desafios
+                    </a>
+                    <a href="company_dashboard.html" class="text-text-secondary hover:text-primary transition-colors">
+                        Dashboard
+                    </a>
+                    <a href="challenge_management_company.html" class="text-text-secondary hover:text-primary transition-colors">
+                        Gerenciar
+                    </a>
+                </nav>
+
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4">
+                    <!-- Notifications -->
+                    <button class="relative p-2 text-text-secondary hover:text-primary transition-colors">
+                        <i class="fas fa-bell text-lg"></i>
+                        <span class="absolute -top-1 -right-1 w-5 h-5 bg-error text-white text-xs rounded-full flex items-center justify-center">3</span>
+                    </button>
+
+                    <!-- Profile Dropdown -->
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 p-2 rounded-lg hover:bg-secondary-50 transition-colors" onclick="toggleProfileMenu()">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Perfil" class="w-8 h-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <span class="text-text-primary font-medium hidden sm:block">João Silva</span>
+                            <i class="fas fa-chevron-down text-text-secondary text-sm"></i>
+                        </button>
+
+                        <!-- Dropdown Menu -->
+                        <div id="profileMenu" class="hidden absolute right-0 mt-2 w-48 bg-surface rounded-lg shadow-elevation-lg border border-secondary-200 py-2 z-50">
+                            <a href="user_profile_management.html" class="flex items-center px-4 py-2 text-sm text-primary bg-primary-50 border-r-2 border-primary">
+                                <i class="fas fa-user mr-3"></i>
+                                Meu Perfil
+                            </a>
+                            <a href="challenge_browse_and_search.html" class="flex items-center px-4 py-2 text-sm text-text-secondary hover:bg-secondary-50">
+                                <i class="fas fa-trophy mr-3"></i>
+                                Meus Desafios
+                            </a>
+                            <a href="javascript:void(0)" class="flex items-center px-4 py-2 text-sm text-text-secondary hover:bg-secondary-50">
+                                <i class="fas fa-cog mr-3"></i>
+                                Configurações
+                            </a>
+                            <hr class="my-2 border-secondary-200" />
+                            <a href="login_screen.html" class="flex items-center px-4 py-2 text-sm text-error hover:bg-error/5">
+                                <i class="fas fa-sign-out-alt mr-3"></i>
+                                Sair
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden p-2 text-text-secondary hover:text-primary transition-colors" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden border-t border-secondary-200 py-4">
+                <div class="space-y-2">
+                    <a href="challenge_browse_and_search.html" class="block px-4 py-2 text-text-secondary hover:text-primary hover:bg-secondary-50 rounded-lg transition-colors">
+                        Desafios
+                    </a>
+                    <a href="company_dashboard.html" class="block px-4 py-2 text-text-secondary hover:text-primary hover:bg-secondary-50 rounded-lg transition-colors">
+                        Dashboard
+                    </a>
+                    <a href="challenge_management_company.html" class="block px-4 py-2 text-text-secondary hover:text-primary hover:bg-secondary-50 rounded-lg transition-colors">
+                        Gerenciar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Page Header -->
+        <div class="mb-8">
+            <div class="flex items-center space-x-2 text-sm text-text-secondary mb-2">
+                <a href="challenge_browse_and_search.html" class="hover:text-primary transition-colors">Início</a>
+                <i class="fas fa-chevron-right text-xs"></i>
+                <span>Gerenciar Perfil</span>
+            </div>
+            <h1 class="text-fluid-3xl font-bold text-text-primary">Gerenciar Perfil</h1>
+            <p class="text-text-secondary mt-2">Mantenha suas informações atualizadas para melhorar suas oportunidades</p>
+        </div>
+
+        <!-- Auto-save Status -->
+        <div id="autoSaveStatus" class="hidden mb-6 p-3 bg-accent-50 border border-accent-200 rounded-lg">
+            <div class="flex items-center">
+                <i class="fas fa-check-circle text-accent mr-2"></i>
+                <span class="text-accent text-sm font-medium">Alterações salvas automaticamente</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Profile Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="bg-surface rounded-lg shadow-elevation-md border border-secondary-200 p-6 sticky top-24">
+                    <!-- Profile Photo -->
+                    <div class="text-center mb-6">
+                        <div class="relative inline-block">
+                            <img id="profilePhoto" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Foto do perfil" class="w-24 h-24 rounded-full object-cover border-4 border-secondary-200" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <button onclick="document.getElementById('photoUpload').click()" class="absolute bottom-0 right-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center hover:bg-primary-700 transition-colors">
+                                <i class="fas fa-camera text-sm"></i>
+                            </button>
+                            <input type="file" id="photoUpload" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)" />
+                        </div>
+                        <h3 class="text-lg font-semibold text-text-primary mt-3">João Silva</h3>
+                        <p class="text-text-secondary text-sm">Graduando em Engenharia</p>
+                        <div class="flex items-center justify-center mt-2">
+                            <div class="w-2 h-2 bg-accent rounded-full mr-2"></div>
+                            <span class="text-accent text-sm font-medium">Online</span>
+                        </div>
+                    </div>
+
+                    <!-- Profile Completion -->
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-text-primary">Perfil Completo</span>
+                            <span class="text-sm text-primary font-semibold">85%</span>
+                        </div>
+                        <div class="w-full bg-secondary-200 rounded-full h-2">
+                            <div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                        <p class="text-xs text-text-secondary mt-2">Complete seu perfil para aumentar suas chances</p>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="space-y-2">
+                        <button onclick="switchTab('personal')" class="w-full text-left px-3 py-2 text-sm text-text-secondary hover:text-primary hover:bg-primary-50 rounded-lg transition-colors">
+                            <i class="fas fa-user mr-2"></i>
+                            Informações Pessoais
+                        </button>
+                        <button onclick="switchTab('professional')" class="w-full text-left px-3 py-2 text-sm text-text-secondary hover:text-primary hover:bg-primary-50 rounded-lg transition-colors">
+                            <i class="fas fa-briefcase mr-2"></i>
+                            Detalhes Profissionais
+                        </button>
+                        <button onclick="switchTab('portfolio')" class="w-full text-left px-3 py-2 text-sm text-text-secondary hover:text-primary hover:bg-primary-50 rounded-lg transition-colors">
+                            <i class="fas fa-folder mr-2"></i>
+                            Portfólio
+                        </button>
+                        <button onclick="switchTab('settings')" class="w-full text-left px-3 py-2 text-sm text-text-secondary hover:text-primary hover:bg-primary-50 rounded-lg transition-colors">
+                            <i class="fas fa-cog mr-2"></i>
+                            Configurações
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3">
+                <!-- Tab Navigation -->
+                <div class="bg-surface rounded-lg shadow-elevation-md border border-secondary-200 mb-6">
+                    <div class="border-b border-secondary-200">
+                        <nav class="flex space-x-8 px-6" aria-label="Tabs">
+                            <button onclick="switchTab('personal')" class="tab-button active py-4 px-1 border-b-2 font-medium text-sm transition-colors" data-tab="personal">
+                                <i class="fas fa-user mr-2"></i>
+                                Informações Pessoais
+                            </button>
+                            <button onclick="switchTab('professional')" class="tab-button py-4 px-1 border-b-2 font-medium text-sm transition-colors" data-tab="professional">
+                                <i class="fas fa-briefcase mr-2"></i>
+                                Detalhes Profissionais
+                            </button>
+                            <button onclick="switchTab('portfolio')" class="tab-button py-4 px-1 border-b-2 font-medium text-sm transition-colors" data-tab="portfolio">
+                                <i class="fas fa-folder mr-2"></i>
+                                Portfólio
+                            </button>
+                            <button onclick="switchTab('settings')" class="tab-button py-4 px-1 border-b-2 font-medium text-sm transition-colors" data-tab="settings">
+                                <i class="fas fa-cog mr-2"></i>
+                                Configurações
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Tab Content -->
+                <!-- Personal Information Tab -->
+                <div id="personalTab" class="tab-content">
+                    <div class="bg-surface rounded-lg shadow-elevation-md border border-secondary-200 p-6">
+                        <h2 class="text-xl font-semibold text-text-primary mb-6">Informações Pessoais</h2>
+                        
+                        <form class="space-y-6" onsubmit="handleFormSubmit(event, 'personal')">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Full Name -->
+                                <div>
+                                    <label for="fullName" class="block text-sm font-medium text-text-primary mb-2">
+                                        Nome Completo *
+                                    </label>
+                                    <input type="text" id="fullName" name="fullName" value="João Silva Santos" class="form-input w-full" required oninput="handleAutoSave()" />
+                                </div>
+
+                                <!-- Email -->
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-text-primary mb-2">
+                                        Email *
+                                    </label>
+                                    <input type="email" id="email" name="email" value="joao.silva@email.com" class="form-input w-full" required oninput="handleAutoSave()" />
+                                </div>
+
+                                <!-- Phone -->
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium text-text-primary mb-2">
+                                        Telefone
+                                    </label>
+                                    <input type="tel" id="phone" name="phone" value="(11) 99999-9999" class="form-input w-full" placeholder="(11) 99999-9999" oninput="handlePhoneFormat(this); handleAutoSave()" />
+                                </div>
+
+                                <!-- Birth Date -->
+                                <div>
+                                    <label for="birthDate" class="block text-sm font-medium text-text-primary mb-2">
+                                        Data de Nascimento
+                                    </label>
+                                    <input type="date" id="birthDate" name="birthDate" value="1995-03-15" class="form-input w-full" oninput="handleAutoSave()" />
+                                </div>
+
+                                <!-- CPF -->
+                                <div>
+                                    <label for="cpf" class="block text-sm font-medium text-text-primary mb-2">
+                                        CPF
+                                    </label>
+                                    <input type="text" id="cpf" name="cpf" value="123.456.789-00" class="form-input w-full" placeholder="000.000.000-00" oninput="handleCPFFormat(this); handleAutoSave()" />
+                                </div>
+
+                                <!-- Gender -->
+                                <div>
+                                    <label for="gender" class="block text-sm font-medium text-text-primary mb-2">
+                                        Gênero
+                                    </label>
+                                    <select id="gender" name="gender" class="form-input w-full" onchange="handleAutoSave()">
+                                        <option value>Selecione</option>
+                                        <option value="masculino" selected>Masculino</option>
+                                        <option value="feminino">Feminino</option>
+                                        <option value="outro">Outro</option>
+                                        <option value="nao-informar">Prefiro não informar</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Address Section -->
+                            <div class="border-t border-secondary-200 pt-6">
+                                <h3 class="text-lg font-medium text-text-primary mb-4">Endereço</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <label for="cep" class="block text-sm font-medium text-text-primary mb-2">
+                                            CEP
+                                        </label>
+                                        <input type="text" id="cep" name="cep" value="01234-567" class="form-input w-full" placeholder="00000-000" oninput="handleCEPFormat(this); handleAutoSave()" />
+                                    </div>
+                                    <div class="md:col-span-2">
+                                        <label for="street" class="block text-sm font-medium text-text-primary mb-2">
+                                            Rua
+                                        </label>
+                                        <input type="text" id="street" name="street" value="Rua das Flores, 123" class="form-input w-full" oninput="handleAutoSave()" />
+                                    </div>
+                                    <div>
+                                        <label for="city" class="block text-sm font-medium text-text-primary mb-2">
+                                            Cidade
+                                        </label>
+                                        <input type="text" id="city" name="city" value="São Paulo" class="form-input w-full" oninput="handleAutoSave()" />
+                                    </div>
+                                    <div>
+                                        <label for="state" class="block text-sm font-medium text-text-primary mb-2">
+                                            Estado
+                                        </label>
+                                        <select id="state" name="state" class="form-input w-full" onchange="handleAutoSave()">
+                                            <option value>Selecione</option>
+                                            <option value="SP" selected>São Paulo</option>
+                                            <option value="RJ">Rio de Janeiro</option>
+                                            <option value="MG">Minas Gerais</option>
+                                            <option value="RS">Rio Grande do Sul</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="country" class="block text-sm font-medium text-text-primary mb-2">
+                                            País
+                                        </label>
+                                        <input type="text" id="country" name="country" value="Brasil" class="form-input w-full" readonly />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bio Section -->
+                            <div class="border-t border-secondary-200 pt-6">
+                                <label for="bio" class="block text-sm font-medium text-text-primary mb-2">
+                                    Sobre Mim
+                                </label>
+                                <textarea id="bio" name="bio" rows="4" class="form-input w-full resize-none" placeholder="Conte um pouco sobre você, seus interesses e objetivos profissionais..." oninput="handleAutoSave(); updateCharCount(this, 'bioCount', 500)" maxlength="500">Estudante de Engenharia de Software apaixonado por tecnologia e inovação. Busco oportunidades para aplicar conhecimentos em desenvolvimento web e mobile, com foco em soluções que impactem positivamente a sociedade.</textarea>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="text-xs text-text-secondary">Máximo 500 caracteres</span>
+                                    <span id="bioCount" class="text-xs text-text-secondary">245/500</span>
+                                </div>
+                            </div>
+
+                            <!-- Save Button -->
+                            <div class="flex justify-end pt-6 border-t border-secondary-200">
+                                <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-700 transition-colors font-medium">
+                                    <i class="fas fa-save mr-2"></i>
+                                    Salvar Alterações
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Professional Details Tab -->
+                <div id="professionalTab" class="tab-content hidden">
+                    <div class="space-y-6">
+                        <!-- University Information -->
+                        <div class="bg-surface rounded-lg shadow-elevation-md border border-secondary-200 p-6">
+                            <h2 class="text-xl font-semibold text-text-primary mb-6">Informações Acadêmicas</h2>
+                            
+                            <form class="space-y-6" onsubmit="handleFormSubmit(event, 'professional')">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- University -->
+                                    <div>
+                                        <label for="university" class="block text-sm font-medium text-text-primary mb-2">
+                                            Universidade *
+                                        </label>
+                                        <input type="text" id="university" name="university" value="Universidade de São Paulo" class="form-input w-full" required oninput="handleAutoSave()" />
+                                    </div>
+
+                                    <!-- Course -->
+                                    <div>
+                                        <label for="course" class="block text-sm font-medium text-text-primary mb-2">
+                                            Curso *
+                                        </label>
+                                        <input type="text" id="course" name="course" value="Engenharia de Software" class="form-input w-full" required oninput="handleAutoSave()" />
+                                    </div>
+
+                                    <!-- Graduation Year -->
+                                    <div>
+                                        <label for="graduationYear" class="block text-sm font-medium text-text-primary mb-2">
+                                            Ano de Formatura
+                                        </label>
+                                        <select id="graduationYear" name="graduationYear" class="form-input w-full" onchange="handleAutoSave()">
+                                            <option value>Selecione</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025" selected>2025</option>
+                                            <option value="2026">2026</option>
+                                            <option value="2027">2027</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- GPA -->
+                                    <div>
+                                        <label for="gpa" class="block text-sm font-medium text-text-primary mb-2">
+                                            CRA/Média
+                                        </label>
+                                        <input type="number" id="gpa" name="gpa" value="8.5" step="0.1" min="0" max="10" class="form-input w-full" oninput="handleAutoSave()" />
+                                    </div>
+                                </div>
+
+                                <!-- Specialization -->
+                                <div>
+                                    <label for="specialization" class="block text-sm font-medium text-text-primary mb-2">
+                                        Área de Especialização
+                                    </label>
+                                    <textarea id="specialization" name="specialization" rows="3" class="form-input w-full resize-none" placeholder="Descreva suas áreas de especialização e interesse..." oninput="handleAutoSave()">Desenvolvimento Full-Stack com foco em React, Node.js e bancos de dados relacionais. Experiência em metodologias ágeis e desenvolvimento de APIs RESTful.</textarea>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Skills Section -->
+                        <div class="bg-surface rounded-lg shadow-elevation-md border border-secondary-200 p-6">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Habilidades Técnicas</h3>
+                            
+                            <!-- Add Skill -->
+                            <div class="flex gap-2 mb-4">
+                                <input type="text" id="newSkill" placeholder="Adicionar nova habilidade..." class="form-input flex-1" onkeypress="handleSkillAdd(event)" />
+                                <button type="button" onclick="addSkill()" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-700 transition-colors">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+
+                            <!-- Skills List -->
+                            <div id="skillsList" class="flex flex-wrap gap-2">
+                                <span class="skill-tag">JavaScript <button onclick="removeSkill(this)"><i class="fas fa-times"></i></button></span>
+                                <span class="skill-tag">React <button onclick="removeSkill(this)"><i class="fas fa-times"></i></button></span>
+                                <span class="skill-tag">Node.js <button onclick="removeSkill(this)"><i class="fas fa-times"></i></button></span>
+                                <span class="skill-tag">Python <button onclick="removeSkill(this)"><i class="fas fa-times"></i></button></span>
+                                <span class="skill-tag">SQL <button onclick="removeSkill(this)"><i class="fas fa-times"></i></button></span>
+                                <span class="skill-tag">Git <button onclick="removeSkill(this)"><i class="fas fa-times"></i></button></span>
+                            </div>
+                        </div>
+
+                        <!-- Experience Section -->
+                        <div class="bg-surface rounded-lg shadow-elevation-md border border-secondary-200 p-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-lg font-semibold text-text-primary">Experiência Profissional</h3>
+                                <button onclick="addExperience()" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                                    <i class="fas fa-plus mr-2"></i>
+                                    Adicionar
+                                </button>
+                            </div>
+
+                            <div id="experienceList" class="space-y-4">
+                                <!-- Experience Item -->
+                                <div class="experience-item border border-secondary-200 rounded-lg p-4">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-text-primary mb-2">Cargo</label>
+                                            <input type="text" value="Desenvolvedor Júnior" class="form-input w-full" oninput="handleAutoSave()" />
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-text-primary mb-2">Empresa</label>
+                                            <input type="text" value="TechStart Solutions" class="form-input w-full" oninput="handleAutoSave()" />
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-text-primary mb-2">Período</label>
+                                            <input type="text" value="Jan 2024 - Atual" class="form-input w-full" oninput="handleAutoSave()" />
+                                        </div>
+                                        <div class="flex items-end">
+                                            <button onclick="removeExperience(this)" class="text-error hover:text-error/80 transition-colors">
+                                                <i class="fas fa-trash mr-1"></i>
+                                                Remover
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <label class="block text-sm font-medium text-text-primary mb-2">Descrição</label>
+                                        <textarea rows="3" class="form-input w-full resize-none" oninput="handleAutoSave()">Desenvolvimento de aplicações web utilizando React e Node.js. Participação em projetos ágeis com metodologia Scrum.</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Career Preferences -->
+                        <div class="bg-surface rounded-lg shadow-elevation-md border border-secondary-200 p-6">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Preferências de Carreira</h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="desiredRole" class="block text-sm font-medium text-text-primary mb-2">
+                                        Cargo Desejado
+                                    </label>
+                                    <input type="text" id="desiredRole" value="Desenvolvedor Full-Stack" class="form-input w-full" oninput="handleAutoSave()" />
+                                </div>
+                                <div>
+                                    <label for="salaryExpectation" class="block text-sm font-medium text-text-primary mb-2">
+                                        Expectativa Salarial
+                                    </label>
+                                    <input type="text" id="salaryExpectation" value="R$ 5.000 - R$ 7.000" class="form-input w-full" oninput="handleAutoSave()" />
+                                </div>
+                                <div>
+                                    <label for="workMode" class="block text-sm font-medium text-text-primary mb-2">
+                                        Modalidade de Trabalho
+                                    </label>
+                                    <select id="workMode" class="form-input w-full" onchange="handleAutoSave()">
+                                        <option value="presencial">Presencial</option>
+                                        <option value="remoto">Remoto</option>
+                                        <option value="hibrido" selected>Híbrido</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="availability" class="block text-sm font-medium text-text-primary mb-2">
+                                        Disponibilidade
+                                    </label>
+                                    <select id="availability" class="form-input w-full" onchange="handleAutoSave()">
+                                        <option value="imediata" selected>Imediata</option>
+                                        <option value="30-dias">30 dias</option>
+                                        <option value="60-dias">60 dias</option>
+                                        <option value="negociar">A negociar</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Tab -->
+                <div id="portfolioTab" class="tab-content hidden">
+                    <div class="space-y-6">
+                        <!-- Portfolio Header -->
+                        <div class="bg-surface rounded-lg shadow-elevation-md border border-secondary-200 p-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <div>
+                                    <h2 class="text-xl font-semibold text-text-primary">Meu Portfólio</h2>
+                                    <p class="text-text-secondary text-sm mt-1">Showcase seus projetos e conquistas</p>
+                                </div>
+                                <button onclick="addPortfolioItem()" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-700 transition-colors">
+                                    <i class="fas fa-plus mr-2"></i>
+                                    Adicionar Projeto
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Portfolio Items -->
+                        <div id="portfolioList" class="space-y-6">
+                            <!-- Portfolio Item 1 -->
+                            <div class="portfolio-item bg-surface rounded-lg shadow-elevation-md border border-secondary-200 p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-code text-primary text-lg"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-text-primary">Sistema de Gestão Acadêmica</h3>
+                                            <p class="text-text-secondary text-sm">Aplicação Web • Concluído</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button onclick="editPortfolioItem(this)" class="text-text-secondary hover:text-primary transition-colors">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button onclick="removePortfolioItem(this)" class="text-error hover:text-error/80 transition-colors">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                    <div class="lg:col-span-2">
+                                        <p class="text-text-secondary mb-4">
+                                            Sistema completo para gestão de notas, frequência e comunicação entre professores, alunos e coordenação. 
+                                            Desenvolvido com React, Node.js e PostgreSQL.
+                                        </p>
+
+                                        <div class="flex flex-wrap gap-2 mb-4">
+                                            <span class="px-2 py-1 bg-primary-50 text-primary text-xs rounded-full">React</span>
+                                            <span class="px-2 py-1 bg-primary-50 text-primary text-xs rounded-full">Node.js</span>
+                                            <span class="px-2 py-1 bg-primary-50 text-primary text-xs rounded-full">PostgreSQL</span>
+                                            <span class="px-2 py-1 bg-primary-50 text-primary text-xs rounded-full">Material-UI</span>
+                                        </div>
+
+                                        <div class="flex space-x-4">
+                                            <a href="javascript:void(0)" class="text-primary hover:text-primary-700 transition-colors text-sm">
+                                                <i class="fas fa-external-link-alt mr-1"></i>
+                                                Ver Demo
+                                            </a>
+                                            <a href="javascript:void(0)" class="text-primary hover:text-primary-700 transition-colors text-sm">
+                                                <i class="fab fa-github mr-1"></i>
+                                                Código Fonte
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sistema de Gestão Acadêmica" class="w-full h-32 object-cover rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Portfolio Item 2 -->
+                            <div class="portfolio-item bg-surface rounded-lg shadow-elevation-md border border-secondary-200 p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-accent-50 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-mobile-alt text-accent text-lg"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-text-primary">App de Delivery Sustentável</h3>
+                                            <p class="text-text-secondary text-sm">Aplicativo Mobile • Em Desenvolvimento</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button onclick="editPortfolioItem(this)" class="text-text-secondary hover:text-primary transition-colors">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button onclick="removePortfolioItem(this)" class="text-error hover:text-error/80 transition-colors">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                    <div class="lg:col-span-2">
+                                        <p class="text-text-secondary mb-4">
+                                            Aplicativo que conecta consumidores a restaurantes com práticas sustentáveis, 
+                                            incentivando o uso de embalagens ecológicas e redução do desperdício.
+                                        </p>
+
+                                        <div class="flex flex-wrap gap-2 mb-4">
+                                            <span class="px-2 py-1 bg-accent-50 text-accent text-xs rounded-full">React Native</span>
+                                            <span class="px-2 py-1 bg-accent-50 text-accent text-xs rounded-full">Firebase</span>
+                                            <span class="px-2 py-1 bg-accent-50 text-accent text-xs rounded-full">Maps API</span>
+                                        </div>
+
+                                        <div class="flex items-center space-x-4">
+                                            <div class="flex items-center">
+                                                <div class="w-full bg-secondary-200 rounded-full h-2 mr-2" style="width: 100px;">
+                                                    <div class="bg-accent h-2 rounded-full" style="width: 70%"></div>
+                                                </div>
+                                                <span class="text-sm text-text-secondary">70% concluído</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="App de Delivery Sustentável" class="w-full h-32 object-cover rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Certifications -->
+                        <div class="bg-surface rounded-lg shadow-elevation-md border border-secondary-200 p-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-lg font-semibold text-text-primary">Certificações</h3>
+                                <button onclick="addCertification()" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                                    <i class="fas fa-plus mr-2"></i>
+                                    Adicionar
+                                </button>
+                            </div>
+
+                            <div id="certificationsList" class="space-y-3">
+                                <div class="certification-item flex items-center justify-between p-3 border border-secondary-200 rounded-lg">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-warning/10 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-certificate text-warning"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-text-primary">AWS Cloud Practitioner</h4>
+                                            <p class="text-sm text-text-secondary">Amazon Web Services • Válido até Dez 2025</p>
+                                        </div>
+                                    </div>
+                                    <button onclick="removeCertification(this)" class="text-error hover:text-error/80 transition-colors">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+
+                                <div class="certification-item flex items-center justify-between p-3 border border-secondary-200 rounded-lg">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-primary-50 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-certificate text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-text-primary">Scrum Master Certified</h4>
+                                            <p class="text-sm text-text-secondary">Scrum Alliance • Válido até Jun 2026</p>
+                                        </div>
+                                    </div>
+                                    <button onclick="removeCertification(this)" class="text-error hover:text-error/80 transition-colors">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settingsTab" class="tab-content hidden">
+                    <div class="space-y-6">
+                        <!-- Account Settings -->
+                        <div class="bg-surface rounded-lg shadow-elevation-md border border-secondary-200 p-6">
+                            <h2 class="text-xl font-semibold text-text-primary mb-6">Configurações da Conta</h2>
+                            
+                            <!-- Password Change -->
+                            <div class="border-b border-secondary-200 pb-6 mb-6">
+                                <h3 class="text-lg font-medium text-text-primary mb-4">Alterar Senha</h3>
+                                <form class="space-y-4" onsubmit="handlePasswordChange(event)">
+                                    <div>
+                                        <label for="currentPassword" class="block text-sm font-medium text-text-primary mb-2">
+                                            Senha Atual
+                                        </label>
+                                        <input type="password" id="currentPassword" name="currentPassword" class="form-input w-full md:w-1/2" required />
+                                    </div>
+                                    <div>
+                                        <label for="newPassword" class="block text-sm font-medium text-text-primary mb-2">
+                                            Nova Senha
+                                        </label>
+                                        <input type="password" id="newPassword" name="newPassword" class="form-input w-full md:w-1/2" required />
+                                    </div>
+                                    <div>
+                                        <label for="confirmPassword" class="block text-sm font-medium text-text-primary mb-2">
+                                            Confirmar Nova Senha
+                                        </label>
+                                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-input w-full md:w-1/2" required />
+                                    </div>
+                                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-700 transition-colors">
+                                        Alterar Senha
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- Notification Preferences -->
+                            <div class="border-b border-secondary-200 pb-6 mb-6">
+                                <h3 class="text-lg font-medium text-text-primary mb-4">Preferências de Notificação</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-medium text-text-primary">Novos Desafios</h4>
+                                            <p class="text-sm text-text-secondary">Receber notificações sobre novos desafios disponíveis</p>
+                                        </div>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" class="sr-only peer" checked />
+                                            <div class="w-11 h-6 bg-secondary-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                        </label>
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-medium text-text-primary">Avaliações</h4>
+                                            <p class="text-sm text-text-secondary">Receber notificações sobre avaliações de respostas</p>
+                                        </div>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" class="sr-only peer" checked />
+                                            <div class="w-11 h-6 bg-secondary-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                        </label>
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-medium text-text-primary">Matches</h4>
+                                            <p class="text-sm text-text-secondary">Receber notificações sobre novos matches com empresas</p>
+                                        </div>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" class="sr-only peer" />
+                                            <div class="w-11 h-6 bg-secondary-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                        </label>
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-medium text-text-primary">Email Marketing</h4>
+                                            <p class="text-sm text-text-secondary">Receber newsletters e atualizações da plataforma</p>
+                                        </div>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" class="sr-only peer" />
+                                            <div class="w-11 h-6 bg-secondary-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Privacy Settings -->
+                            <div class="border-b border-secondary-200 pb-6 mb-6">
+                                <h3 class="text-lg font-medium text-text-primary mb-4">Configurações de Privacidade</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label for="profileVisibility" class="block text-sm font-medium text-text-primary mb-2">
+                                            Visibilidade do Perfil
+                                        </label>
+                                        <select id="profileVisibility" class="form-input w-full md:w-1/2">
+                                            <option value="public" selected>Público - Visível para todas as empresas</option>
+                                            <option value="limited">Limitado - Apenas empresas com match</option>
+                                            <option value="private">Privado - Não visível</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label for="contactVisibility" class="block text-sm font-medium text-text-primary mb-2">
+                                            Informações de Contato
+                                        </label>
+                                        <select id="contactVisibility" class="form-input w-full md:w-1/2">
+                                            <option value="visible" selected>Visível para empresas</option>
+                                            <option value="hidden">Oculto até o match</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="allowMessages" class="rounded border-secondary-300 text-primary focus:ring-primary-500" checked />
+                                        <label for="allowMessages" class="text-sm text-text-primary">
+                                            Permitir que empresas me enviem mensagens diretas
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Account Actions -->
+                            <div>
+                                <h3 class="text-lg font-medium text-text-primary mb-4">Ações da Conta</h3>
+                                <div class="space-y-3">
+                                    <button onclick="exportData()" class="flex items-center px-4 py-2 text-primary border border-primary rounded-lg hover:bg-primary-50 transition-colors">
+                                        <i class="fas fa-download mr-2"></i>
+                                        Exportar Meus Dados
+                                    </button>
+                                    
+                                    <button onclick="deactivateAccount()" class="flex items-center px-4 py-2 text-error border border-error rounded-lg hover:bg-error/5 transition-colors">
+                                        <i class="fas fa-user-times mr-2"></i>
+                                        Desativar Conta
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-secondary-200 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-sm text-text-secondary">
+                <p>© 2025 TCC Innovation. Todos os direitos reservados.</p>
+                <div class="mt-2 space-x-4">
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors">Termos de Uso</a>
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors">Política de Privacidade</a>
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors">Suporte</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .tab-button.active {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+        
+        .tab-button:not(.active) {
+            color: var(--color-text-secondary);
+            border-color: transparent;
+        }
+        
+        .tab-button:not(.active):hover {
+            color: var(--color-primary);
+        }
+
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 0.75rem;
+            background-color: var(--color-primary-50);
+            color: var(--color-primary);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .skill-tag button {
+            margin-left: 0.5rem;
+            color: var(--color-primary);
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .skill-tag button:hover {
+            opacity: 1;
+        }
+    </style>
+
+    <script>
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + 'Tab').classList.remove('hidden');
+            
+            // Add active class to selected tab button
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Profile menu toggle
+        function toggleProfileMenu() {
+            const profileMenu = document.getElementById('profileMenu');
+            profileMenu.classList.toggle('hidden');
+        }
+
+        // Auto-save functionality
+        let autoSaveTimeout;
+        function handleAutoSave() {
+            clearTimeout(autoSaveTimeout);
+            autoSaveTimeout = setTimeout(() => {
+                showAutoSaveStatus();
+            }, 1000);
+        }
+
+        function showAutoSaveStatus() {
+            const status = document.getElementById('autoSaveStatus');
+            status.classList.remove('hidden');
+            setTimeout(() => {
+                status.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Form submission handlers
+        function handleFormSubmit(event, formType) {
+            event.preventDefault();
+            showAutoSaveStatus();
+        }
+
+        // Photo upload handler
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profilePhoto').src = e.target.result;
+                    handleAutoSave();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Format handlers
+        function handlePhoneFormat(input) {
+            let value = input.value.replace(/\D/g, '');
+            value = value.replace(/(\d{2})(\d)/, '($1) $2');
+            value = value.replace(/(\d{5})(\d)/, '$1-$2');
+            input.value = value;
+        }
+
+        function handleCPFFormat(input) {
+            let value = input.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            input.value = value;
+        }
+
+        function handleCEPFormat(input) {
+            let value = input.value.replace(/\D/g, '');
+            value = value.replace(/(\d{5})(\d)/, '$1-$2');
+            input.value = value;
+        }
+
+        // Character count handler
+        function updateCharCount(textarea, counterId, maxLength) {
+            const count = textarea.value.length;
+            document.getElementById(counterId).textContent = `${count}/${maxLength}`;
+        }
+
+        // Skills management
+        function addSkill() {
+            const input = document.getElementById('newSkill');
+            const skill = input.value.trim();
+            if (skill) {
+                const skillsList = document.getElementById('skillsList');
+                const skillTag = document.createElement('span');
+                skillTag.className = 'skill-tag';
+                skillTag.innerHTML = `${skill} <button onclick="removeSkill(this)"><i class="fas fa-times"></i></button>`;
+                skillsList.appendChild(skillTag);
+                input.value = '';
+                handleAutoSave();
+            }
+        }
+
+        function removeSkill(button) {
+            button.parentElement.remove();
+            handleAutoSave();
+        }
+
+        function handleSkillAdd(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                addSkill();
+            }
+        }
+
+        // Experience management
+        function addExperience() {
+            const experienceList = document.getElementById('experienceList');
+            const experienceItem = document.createElement('div');
+            experienceItem.className = 'experience-item border border-secondary-200 rounded-lg p-4';
+            experienceItem.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Cargo</label>
+                        <input type="text" class="form-input w-full" oninput="handleAutoSave()">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Empresa</label>
+                        <input type="text" class="form-input w-full" oninput="handleAutoSave()">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Período</label>
+                        <input type="text" class="form-input w-full" oninput="handleAutoSave()">
+                    </div>
+                    <div class="flex items-end">
+                        <button onclick="removeExperience(this)" class="text-error hover:text-error/80 transition-colors">
+                            <i class="fas fa-trash mr-1"></i>
+                            Remover
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label class="block text-sm font-medium text-text-primary mb-2">Descrição</label>
+                    <textarea rows="3" class="form-input w-full resize-none" oninput="handleAutoSave()"></textarea>
+                </div>
+            `;
+            experienceList.appendChild(experienceItem);
+        }
+
+        function removeExperience(button) {
+            button.closest('.experience-item').remove();
+            handleAutoSave();
+        }
+
+        // Portfolio management
+        function addPortfolioItem() {
+            // Implementation for adding portfolio item
+            alert('Funcionalidade de adicionar projeto será implementada');
+        }
+
+        function editPortfolioItem(button) {
+            // Implementation for editing portfolio item
+            alert('Funcionalidade de editar projeto será implementada');
+        }
+
+        function removePortfolioItem(button) {
+            if (confirm('Tem certeza que deseja remover este projeto?')) {
+                button.closest('.portfolio-item').remove();
+                handleAutoSave();
+            }
+        }
+
+        // Certification management
+        function addCertification() {
+            // Implementation for adding certification
+            alert('Funcionalidade de adicionar certificação será implementada');
+        }
+
+        function removeCertification(button) {
+            if (confirm('Tem certeza que deseja remover esta certificação?')) {
+                button.closest('.certification-item').remove();
+                handleAutoSave();
+            }
+        }
+
+        // Settings handlers
+        function handlePasswordChange(event) {
+            event.preventDefault();
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (newPassword !== confirmPassword) {
+                alert('As senhas não coincidem');
+                return;
+            }
+            
+            alert('Senha alterada com sucesso!');
+            event.target.reset();
+        }
+
+        function exportData() {
+            alert('Seus dados serão exportados em formato JSON');
+        }
+
+        function deactivateAccount() {
+            if (confirm('Tem certeza que deseja desativar sua conta? Esta ação pode ser revertida.')) {
+                alert('Conta desativada. Você pode reativá-la fazendo login novamente.');
+            }
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            const profileMenu = document.getElementById('profileMenu');
+            const profileButton = event.target.closest('[onclick="toggleProfileMenu()"]');
+            
+            if (!profileButton && !profileMenu.contains(event.target)) {
+                profileMenu.classList.add('hidden');
+            }
+        });
+
+        // Initialize character count
+        document.addEventListener('DOMContentLoaded', function() {
+            const bioTextarea = document.getElementById('bio');
+            if (bioTextarea) {
+                updateCharCount(bioTextarea, 'bioCount', 500);
+            }
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

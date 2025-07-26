@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciamento de Desafios - TCC Innovation</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ftccinnova5019back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Header -->
+    <header class="bg-surface shadow-elevation-sm border-b border-secondary-200 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="company_dashboard.html" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-semibold text-text-primary">TCC Innovation</span>
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="company_dashboard.html" class="text-text-secondary hover:text-primary transition-colors">Dashboard</a>
+                    <a href="challenge_management_company.html" class="text-primary font-medium">Desafios</a>
+                    <a href="challenge_browse_and_search.html" class="text-text-secondary hover:text-primary transition-colors">Explorar</a>
+                </nav>
+
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-text-secondary hover:text-primary transition-colors">
+                        <i class="fas fa-bell text-lg"></i>
+                        <span class="absolute -top-1 -right-1 w-3 h-3 bg-error rounded-full"></span>
+                    </button>
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 p-2 rounded-lg hover:bg-secondary-50 transition-colors" onclick="toggleUserMenu()">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Avatar" class="w-8 h-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <span class="text-sm font-medium text-text-primary hidden sm:block">Tech Solutions</span>
+                            <i class="fas fa-chevron-down text-xs text-text-secondary"></i>
+                        </button>
+                        <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-surface rounded-lg shadow-elevation-lg border border-secondary-200 py-1 z-50">
+                            <a href="user_profile_management.html" class="block px-4 py-2 text-sm text-text-secondary hover:bg-secondary-50 hover:text-primary transition-colors">
+                                <i class="fas fa-user mr-2"></i>Perfil
+                            </a>
+                            <a href="javascript:void(0)" class="block px-4 py-2 text-sm text-text-secondary hover:bg-secondary-50 hover:text-primary transition-colors">
+                                <i class="fas fa-cog mr-2"></i>Configurações
+                            </a>
+                            <hr class="my-1 border-secondary-200" />
+                            <a href="login_screen.html" class="block px-4 py-2 text-sm text-text-secondary hover:bg-secondary-50 hover:text-error transition-colors">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Sair
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-surface shadow-elevation-sm border-r border-secondary-200 hidden lg:block">
+            <div class="p-6">
+                <nav class="space-y-2">
+                    <a href="company_dashboard.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-secondary-50 hover:text-primary transition-colors">
+                        <i class="fas fa-chart-bar w-5"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="challenge_management_company.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary-50 text-primary font-medium">
+                        <i class="fas fa-tasks w-5"></i>
+                        <span>Gerenciar Desafios</span>
+                    </a>
+                    <a href="javascript:void(0)" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-secondary-50 hover:text-primary transition-colors">
+                        <i class="fas fa-users w-5"></i>
+                        <span>Candidatos</span>
+                    </a>
+                    <a href="javascript:void(0)" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-secondary-50 hover:text-primary transition-colors">
+                        <i class="fas fa-chart-line w-5"></i>
+                        <span>Relatórios</span>
+                    </a>
+                    <a href="user_profile_management.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-secondary-50 hover:text-primary transition-colors">
+                        <i class="fas fa-building w-5"></i>
+                        <span>Perfil da Empresa</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-6">
+            <!-- Breadcrumb -->
+            <nav class="flex items-center space-x-2 text-sm text-text-secondary mb-6">
+                <a href="company_dashboard.html" class="hover:text-primary transition-colors">Dashboard</a>
+                <i class="fas fa-chevron-right text-xs"></i>
+                <span class="text-text-primary">Gerenciamento de Desafios</span>
+            </nav>
+
+            <!-- Page Header -->
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
+                <div>
+                    <h1 class="text-fluid-3xl font-bold text-text-primary mb-2">Gerenciamento de Desafios</h1>
+                    <p class="text-text-secondary">Crie, edite e monitore seus desafios de recrutamento</p>
+                </div>
+                <div class="mt-4 sm:mt-0 flex space-x-3">
+                    <button onclick="openAnalyticsModal()" class="btn-secondary">
+                        <i class="fas fa-chart-bar mr-2"></i>
+                        Analytics
+                    </button>
+                    <button onclick="openCreateChallengeModal()" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors flex items-center">
+                        <i class="fas fa-plus mr-2"></i>
+                        Novo Desafio
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="border-b border-secondary-200 mb-6">
+                <nav class="flex space-x-8">
+                    <button onclick="switchTab('active')" id="activeTab" class="tab-button active py-2 px-1 border-b-2 border-primary text-primary font-medium">
+                        Ativos
+                        <span class="ml-2 bg-primary-100 text-primary text-xs px-2 py-1 rounded-full">12</span>
+                    </button>
+                    <button onclick="switchTab('draft')" id="draftTab" class="tab-button py-2 px-1 border-b-2 border-transparent text-text-secondary hover:text-text-primary hover:border-secondary-300 transition-colors">
+                        Rascunhos
+                        <span class="ml-2 bg-secondary-100 text-secondary text-xs px-2 py-1 rounded-full">3</span>
+                    </button>
+                    <button onclick="switchTab('archived')" id="archivedTab" class="tab-button py-2 px-1 border-b-2 border-transparent text-text-secondary hover:text-text-primary hover:border-secondary-300 transition-colors">
+                        Arquivados
+                        <span class="ml-2 bg-secondary-100 text-secondary text-xs px-2 py-1 rounded-full">8</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Search and Filters -->
+            <div class="bg-surface rounded-lg shadow-elevation-sm border border-secondary-200 p-4 mb-6">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+                    <div class="flex-1 max-w-md">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-secondary-400"></i>
+                            </div>
+                            <input type="text" placeholder="Buscar desafios..." class="form-input w-full pl-10 pr-4" />
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <select class="form-input">
+                            <option>Todas as categorias</option>
+                            <option>Desenvolvimento</option>
+                            <option>Design</option>
+                            <option>Marketing</option>
+                        </select>
+                        <button class="text-text-secondary hover:text-primary transition-colors">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                        <button onclick="resetFilters()" class="text-text-secondary hover:text-primary transition-colors">
+                            <i class="fas fa-undo"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Challenges Tab Content -->
+            <div id="activeContent" class="tab-content">
+                <div class="bg-surface rounded-lg shadow-elevation-sm border border-secondary-200 overflow-hidden">
+                    <!-- Desktop Table View -->
+                    <div class="hidden lg:block overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-secondary-50 border-b border-secondary-200">
+                                <tr>
+                                    <th class="text-left py-3 px-6 text-sm font-medium text-text-primary">Desafio</th>
+                                    <th class="text-left py-3 px-6 text-sm font-medium text-text-primary">Criado em</th>
+                                    <th class="text-left py-3 px-6 text-sm font-medium text-text-primary">Candidaturas</th>
+                                    <th class="text-left py-3 px-6 text-sm font-medium text-text-primary">Prazo</th>
+                                    <th class="text-left py-3 px-6 text-sm font-medium text-text-primary">Status</th>
+                                    <th class="text-left py-3 px-6 text-sm font-medium text-text-primary">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-secondary-200">
+                                <tr class="hover:bg-secondary-50 transition-colors">
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
+                                                <i class="fas fa-code text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="font-medium text-text-primary">Desenvolvedor Full Stack</h3>
+                                                <p class="text-sm text-text-secondary">Desenvolvimento Web</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-6 text-text-secondary">15/07/2025</td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center">
+                                            <span class="text-text-primary font-medium">24</span>
+                                            <span class="text-text-secondary ml-1">/ 50</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span class="text-warning font-medium">5 dias</span>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent-100 text-accent-700">
+                                            Ativo
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center space-x-2">
+                                            <button onclick="editChallenge(1)" class="text-text-secondary hover:text-primary transition-colors" title="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button onclick="duplicateChallenge(1)" class="text-text-secondary hover:text-primary transition-colors" title="Duplicar">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                            <button onclick="viewResponses(1)" class="text-text-secondary hover:text-primary transition-colors" title="Ver Respostas">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button onclick="archiveChallenge(1)" class="text-text-secondary hover:text-warning transition-colors" title="Arquivar">
+                                                <i class="fas fa-archive"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-secondary-50 transition-colors">
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-accent-100 rounded-lg flex items-center justify-center mr-3">
+                                                <i class="fas fa-paint-brush text-accent"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="font-medium text-text-primary">Designer UX/UI</h3>
+                                                <p class="text-sm text-text-secondary">Design de Interface</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-6 text-text-secondary">12/07/2025</td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center">
+                                            <span class="text-text-primary font-medium">18</span>
+                                            <span class="text-text-secondary ml-1">/ 30</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span class="text-accent font-medium">12 dias</span>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent-100 text-accent-700">
+                                            Ativo
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center space-x-2">
+                                            <button onclick="editChallenge(2)" class="text-text-secondary hover:text-primary transition-colors" title="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button onclick="duplicateChallenge(2)" class="text-text-secondary hover:text-primary transition-colors" title="Duplicar">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                            <button onclick="viewResponses(2)" class="text-text-secondary hover:text-primary transition-colors" title="Ver Respostas">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button onclick="archiveChallenge(2)" class="text-text-secondary hover:text-warning transition-colors" title="Arquivar">
+                                                <i class="fas fa-archive"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Mobile Card View -->
+                    <div class="lg:hidden space-y-4 p-4">
+                        <div class="bg-surface border border-secondary-200 rounded-lg p-4">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-code text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium text-text-primary">Desenvolvedor Full Stack</h3>
+                                        <p class="text-sm text-text-secondary">Desenvolvimento Web</p>
+                                    </div>
+                                </div>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent-100 text-accent-700">
+                                    Ativo
+                                </span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+                                <div>
+                                    <span class="text-text-secondary">Criado em:</span>
+                                    <p class="text-text-primary">15/07/2025</p>
+                                </div>
+                                <div>
+                                    <span class="text-text-secondary">Candidaturas:</span>
+                                    <p class="text-text-primary">24 / 50</p>
+                                </div>
+                                <div>
+                                    <span class="text-text-secondary">Prazo:</span>
+                                    <p class="text-warning font-medium">5 dias</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-3 border-t border-secondary-200">
+                                <div class="flex items-center space-x-3">
+                                    <button onclick="editChallenge(1)" class="text-text-secondary hover:text-primary transition-colors">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button onclick="duplicateChallenge(1)" class="text-text-secondary hover:text-primary transition-colors">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                    <button onclick="viewResponses(1)" class="text-text-secondary hover:text-primary transition-colors">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button onclick="archiveChallenge(1)" class="text-text-secondary hover:text-warning transition-colors">
+                                        <i class="fas fa-archive"></i>
+                                    </button>
+                                </div>
+                                <button class="text-primary hover:text-primary-700 text-sm font-medium">
+                                    Ver Detalhes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Draft Challenges Tab Content -->
+            <div id="draftContent" class="tab-content hidden">
+                <div class="bg-surface rounded-lg shadow-elevation-sm border border-secondary-200 p-8 text-center">
+                    <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-file-alt text-2xl text-secondary-400"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-text-primary mb-2">Rascunhos de Desafios</h3>
+                    <p class="text-text-secondary mb-6">Você tem 3 rascunhos salvos. Continue editando ou publique-os.</p>
+                    <button onclick="openCreateChallengeModal()" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors">
+                        Criar Novo Desafio
+                    </button>
+                </div>
+            </div>
+
+            <!-- Archived Challenges Tab Content -->
+            <div id="archivedContent" class="tab-content hidden">
+                <div class="bg-surface rounded-lg shadow-elevation-sm border border-secondary-200 p-8 text-center">
+                    <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-archive text-2xl text-secondary-400"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-text-primary mb-2">Desafios Arquivados</h3>
+                    <p class="text-text-secondary mb-6">8 desafios arquivados. Você pode restaurá-los a qualquer momento.</p>
+                    <button class="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-secondary-600 transition-colors">
+                        Ver Arquivados
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Challenge Modal -->
+    <div id="createChallengeModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-surface rounded-lg shadow-elevation-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between p-6 border-b border-secondary-200">
+                <h2 class="text-xl font-semibold text-text-primary">Criar Novo Desafio</h2>
+                <button onclick="closeCreateChallengeModal()" class="text-text-secondary hover:text-text-primary transition-colors">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <form class="p-6 space-y-6">
+                <!-- Basic Information -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-text-primary">Informações Básicas</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Título do Desafio</label>
+                            <input type="text" class="form-input w-full" placeholder="Ex: Desenvolvedor Full Stack" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Categoria</label>
+                            <select class="form-input w-full">
+                                <option>Selecione uma categoria</option>
+                                <option>Desenvolvimento</option>
+                                <option>Design</option>
+                                <option>Marketing</option>
+                                <option>Dados</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Descrição</label>
+                        <textarea class="form-input w-full h-32 resize-none" placeholder="Descreva o desafio e o que você espera dos candidatos..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Requirements -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-text-primary">Requisitos Detalhados</h3>
+                    <div class="border border-secondary-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-sm font-medium text-text-primary">Editor de Texto Rico</span>
+                            <div class="flex items-center space-x-2">
+                                <button type="button" class="p-1 text-text-secondary hover:text-text-primary transition-colors">
+                                    <i class="fas fa-bold"></i>
+                                </button>
+                                <button type="button" class="p-1 text-text-secondary hover:text-text-primary transition-colors">
+                                    <i class="fas fa-italic"></i>
+                                </button>
+                                <button type="button" class="p-1 text-text-secondary hover:text-text-primary transition-colors">
+                                    <i class="fas fa-list-ul"></i>
+                                </button>
+                                <button type="button" class="p-1 text-text-secondary hover:text-text-primary transition-colors">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <textarea class="form-input w-full h-40 resize-none" placeholder="Detalhe os requisitos técnicos, habilidades necessárias, critérios de avaliação..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Settings -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-text-primary">Configurações</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Limite de Candidaturas</label>
+                            <input type="number" class="form-input w-full" placeholder="50" min="1" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Data Limite</label>
+                            <input type="date" class="form-input w-full" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Duração (dias)</label>
+                            <input type="number" class="form-input w-full" placeholder="30" min="1" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Evaluation Criteria -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-text-primary">Critérios de Avaliação</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 border border-secondary-200 rounded-lg">
+                            <div class="flex items-center">
+                                <input type="checkbox" class="mr-3" checked />
+                                <span class="text-text-primary">Qualidade técnica</span>
+                            </div>
+                            <select class="form-input w-20">
+                                <option>30%</option>
+                                <option>40%</option>
+                                <option>50%</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center justify-between p-3 border border-secondary-200 rounded-lg">
+                            <div class="flex items-center">
+                                <input type="checkbox" class="mr-3" checked />
+                                <span class="text-text-primary">Criatividade</span>
+                            </div>
+                            <select class="form-input w-20">
+                                <option>25%</option>
+                                <option>30%</option>
+                                <option>35%</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center justify-between p-3 border border-secondary-200 rounded-lg">
+                            <div class="flex items-center">
+                                <input type="checkbox" class="mr-3" checked />
+                                <span class="text-text-primary">Prazo de entrega</span>
+                            </div>
+                            <select class="form-input w-20">
+                                <option>20%</option>
+                                <option>25%</option>
+                                <option>30%</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center justify-end space-x-4 pt-6 border-t border-secondary-200">
+                    <button type="button" onclick="closeCreateChallengeModal()" class="px-4 py-2 text-text-secondary hover:text-text-primary transition-colors">
+                        Cancelar
+                    </button>
+                    <button type="button" class="px-4 py-2 border border-secondary-300 rounded-lg text-text-primary hover:bg-secondary-50 transition-colors">
+                        Salvar Rascunho
+                    </button>
+                    <button type="submit" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors">
+                        Publicar Desafio
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Analytics Modal -->
+    <div id="analyticsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-surface rounded-lg shadow-elevation-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between p-6 border-b border-secondary-200">
+                <h2 class="text-xl font-semibold text-text-primary">Analytics dos Desafios</h2>
+                <button onclick="closeAnalyticsModal()" class="text-text-secondary hover:text-text-primary transition-colors">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="p-6">
+                <!-- Metrics Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-primary-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-primary-600 text-sm font-medium">Total de Desafios</p>
+                                <p class="text-2xl font-bold text-primary">23</p>
+                            </div>
+                            <i class="fas fa-tasks text-primary text-2xl"></i>
+                        </div>
+                    </div>
+                    <div class="bg-accent-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-accent-600 text-sm font-medium">Candidaturas</p>
+                                <p class="text-2xl font-bold text-accent">342</p>
+                            </div>
+                            <i class="fas fa-users text-accent text-2xl"></i>
+                        </div>
+                    </div>
+                    <div class="bg-warning/10 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-warning text-sm font-medium">Taxa de Conversão</p>
+                                <p class="text-2xl font-bold text-warning">68%</p>
+                            </div>
+                            <i class="fas fa-chart-line text-warning text-2xl"></i>
+                        </div>
+                    </div>
+                    <div class="bg-secondary-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-secondary-600 text-sm font-medium">Avaliações</p>
+                                <p class="text-2xl font-bold text-secondary">156</p>
+                            </div>
+                            <i class="fas fa-star text-secondary text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart Placeholder -->
+                <div class="bg-secondary-50 rounded-lg p-8 text-center mb-6">
+                    <div class="w-16 h-16 bg-secondary-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-chart-bar text-2xl text-secondary-400"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-text-primary mb-2">Gráfico de Performance</h3>
+                    <p class="text-text-secondary">Visualização das métricas dos últimos 30 dias</p>
+                </div>
+
+                <!-- Top Performing Challenges -->
+                <div>
+                    <h3 class="text-lg font-medium text-text-primary mb-4">Desafios com Melhor Performance</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-4 border border-secondary-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-code text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-text-primary">Desenvolvedor Full Stack</h4>
+                                    <p class="text-sm text-text-secondary">24 candidaturas</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-accent font-medium">92% taxa de conclusão</p>
+                                <p class="text-sm text-text-secondary">4.8/5 avaliação média</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-4 border border-secondary-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-accent-100 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-paint-brush text-accent"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-text-primary">Designer UX/UI</h4>
+                                    <p class="text-sm text-text-secondary">18 candidaturas</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-accent font-medium">87% taxa de conclusão</p>
+                                <p class="text-sm text-text-secondary">4.6/5 avaliação média</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-secondary-200 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-sm text-text-secondary">
+                <p>© 2025 TCC Innovation. Todos os direitos reservados.</p>
+                <div class="mt-2 space-x-4">
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors">Termos de Uso</a>
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors">Política de Privacidade</a>
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors">Suporte</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active', 'border-primary', 'text-primary', 'font-medium');
+                button.classList.add('border-transparent', 'text-text-secondary');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + 'Content').classList.remove('hidden');
+            
+            // Add active class to selected tab
+            const activeTab = document.getElementById(tabName + 'Tab');
+            activeTab.classList.add('active', 'border-primary', 'text-primary', 'font-medium');
+            activeTab.classList.remove('border-transparent', 'text-text-secondary');
+        }
+
+        // User menu toggle
+        function toggleUserMenu() {
+            const menu = document.getElementById('userMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Close user menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const userMenu = document.getElementById('userMenu');
+            const userButton = event.target.closest('button');
+            
+            if (!userButton || !userButton.onclick || userButton.onclick.toString().indexOf('toggleUserMenu') === -1) {
+                userMenu.classList.add('hidden');
+            }
+        });
+
+        // Modal functions
+        function openCreateChallengeModal() {
+            document.getElementById('createChallengeModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCreateChallengeModal() {
+            document.getElementById('createChallengeModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openAnalyticsModal() {
+            document.getElementById('analyticsModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAnalyticsModal() {
+            document.getElementById('analyticsModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Challenge actions
+        function editChallenge(id) {
+            console.log('Editing challenge:', id);
+            // Implement edit functionality
+        }
+
+        function duplicateChallenge(id) {
+            console.log('Duplicating challenge:', id);
+            // Implement duplicate functionality
+        }
+
+        function viewResponses(id) {
+            console.log('Viewing responses for challenge:', id);
+            // Redirect to responses page or open modal
+        }
+
+        function archiveChallenge(id) {
+            if (confirm('Tem certeza que deseja arquivar este desafio?')) {
+                console.log('Archiving challenge:', id);
+                // Implement archive functionality
+            }
+        }
+
+        function resetFilters() {
+            // Reset all filters
+            document.querySelector('input[placeholder="Buscar desafios..."]').value = '';
+            document.querySelector('select').selectedIndex = 0;
+        }
+
+        // Close modals when clicking outside
+        document.addEventListener('click', function(event) {
+            const createModal = document.getElementById('createChallengeModal');
+            const analyticsModal = document.getElementById('analyticsModal');
+            
+            if (event.target === createModal) {
+                closeCreateChallengeModal();
+            }
+            if (event.target === analyticsModal) {
+                closeAnalyticsModal();
+            }
+        });
+
+        // Escape key to close modals
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeCreateChallengeModal();
+                closeAnalyticsModal();
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default active tab
+            switchTab('active');
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

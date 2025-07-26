@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explorar Desafios - TCC Innovation</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ftccinnova5019back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Header -->
+    <header class="bg-surface shadow-elevation-sm border-b border-secondary-200 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="challenge_browse_and_search.html" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-semibold text-text-primary">TCC Innovation</span>
+                    </a>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="flex-1 max-w-2xl mx-8 relative">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-secondary-400"></i>
+                        </div>
+                        <input type="text" id="searchInput" class="form-input w-full pl-10 pr-12 py-2 text-fluid-base" placeholder="Buscar desafios, empresas ou habilidades..." autocomplete="off" />
+                        <button type="button" id="clearSearch" class="absolute inset-y-0 right-0 pr-3 flex items-center text-secondary-400 hover:text-secondary-600 transition-colors hidden">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Search Suggestions -->
+                    <div id="searchSuggestions" class="absolute top-full left-0 right-0 bg-surface border border-secondary-200 rounded-md shadow-elevation-lg mt-1 hidden z-50">
+                        <div class="p-2">
+                            <div class="text-xs text-secondary-500 uppercase tracking-wide px-2 py-1">Sugestões</div>
+                            <div id="suggestionsList"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4">
+                    <button type="button" id="filterToggle" class="lg:hidden p-2 text-secondary-600 hover:text-primary transition-colors">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                    
+                    <div class="relative">
+                        <button type="button" id="userMenuButton" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-secondary-50 transition-colors">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Perfil do usuário" class="w-8 h-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <span class="hidden sm:block text-sm font-medium text-text-primary">João Silva</span>
+                            <i class="fas fa-chevron-down text-xs text-secondary-400"></i>
+                        </button>
+                        
+                        <!-- User Dropdown -->
+                        <div id="userDropdown" class="absolute right-0 top-full mt-2 w-48 bg-surface border border-secondary-200 rounded-lg shadow-elevation-lg hidden z-50">
+                            <div class="p-2">
+                                <a href="user_profile_management.html" class="flex items-center px-3 py-2 text-sm text-text-primary hover:bg-secondary-50 rounded-md transition-colors">
+                                    <i class="fas fa-user mr-3 text-secondary-400"></i>
+                                    Meu Perfil
+                                </a>
+                                <a href="javascript:void(0)" class="flex items-center px-3 py-2 text-sm text-text-primary hover:bg-secondary-50 rounded-md transition-colors">
+                                    <i class="fas fa-bookmark mr-3 text-secondary-400"></i>
+                                    Salvos
+                                </a>
+                                <a href="javascript:void(0)" class="flex items-center px-3 py-2 text-sm text-text-primary hover:bg-secondary-50 rounded-md transition-colors">
+                                    <i class="fas fa-history mr-3 text-secondary-400"></i>
+                                    Histórico
+                                </a>
+                                <hr class="my-2 border-secondary-200" />
+                                <a href="login_screen.html" class="flex items-center px-3 py-2 text-sm text-error hover:bg-red-50 rounded-md transition-colors">
+                                    <i class="fas fa-sign-out-alt mr-3"></i>
+                                    Sair
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="bg-surface border-b border-secondary-200 py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-2 text-sm">
+                <a href="challenge_browse_and_search.html" class="text-primary hover:text-primary-700 transition-colors">
+                    <i class="fas fa-home"></i>
+                </a>
+                <i class="fas fa-chevron-right text-secondary-400 text-xs"></i>
+                <span class="text-text-secondary">Explorar Desafios</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Filter Chips -->
+    <div class="bg-surface border-b border-secondary-200 py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2 overflow-x-auto pb-2">
+                    <div id="activeFilters" class="flex items-center space-x-2">
+                        <!-- Active filter chips will be inserted here -->
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4 ml-4">
+                    <!-- Sort Dropdown -->
+                    <div class="relative">
+                        <select id="sortSelect" class="form-input text-sm pr-8 appearance-none bg-surface">
+                            <option value="relevance">Relevância</option>
+                            <option value="deadline">Prazo</option>
+                            <option value="difficulty">Dificuldade</option>
+                            <option value="company">Empresa</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                            <i class="fas fa-chevron-down text-secondary-400 text-xs"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Results Count -->
+                    <span class="text-sm text-text-secondary whitespace-nowrap">
+                        <span id="resultsCount">24</span> desafios encontrados
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="flex gap-6">
+            <!-- Sidebar Filters (Desktop) -->
+            <aside class="hidden lg:block w-80 flex-shrink-0">
+                <div class="bg-surface rounded-lg shadow-elevation-sm border border-secondary-200 p-6 sticky top-24">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Filtros</h3>
+                        <button type="button" id="clearAllFilters" class="text-sm text-primary hover:text-primary-700 transition-colors">
+                            Limpar tudo
+                        </button>
+                    </div>
+
+                    <!-- Company Filter -->
+                    <div class="mb-6">
+                        <button type="button" class="filter-section-toggle w-full flex items-center justify-between py-2 text-left" data-target="companyFilter">
+                            <span class="font-medium text-text-primary">Empresa</span>
+                            <i class="fas fa-chevron-down text-secondary-400 transition-transform"></i>
+                        </button>
+                        <div id="companyFilter" class="mt-3 space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox" data-filter="company" data-value="tech-corp" />
+                                <span class="text-sm text-text-secondary ml-2">TechCorp Brasil</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox" data-filter="company" data-value="innovate-solutions" />
+                                <span class="text-sm text-text-secondary ml-2">Innovate Solutions</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox" data-filter="company" data-value="digital-ventures" />
+                                <span class="text-sm text-text-secondary ml-2">Digital Ventures</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="mb-6">
+                        <button type="button" class="filter-section-toggle w-full flex items-center justify-between py-2 text-left" data-target="categoryFilter">
+                            <span class="font-medium text-text-primary">Categoria</span>
+                            <i class="fas fa-chevron-down text-secondary-400 transition-transform"></i>
+                        </button>
+                        <div id="categoryFilter" class="mt-3 space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox" data-filter="category" data-value="desenvolvimento" />
+                                <span class="text-sm text-text-secondary ml-2">Desenvolvimento</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox" data-filter="category" data-value="design" />
+                                <span class="text-sm text-text-secondary ml-2">Design</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox" data-filter="category" data-value="marketing" />
+                                <span class="text-sm text-text-secondary ml-2">Marketing</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox" data-filter="category" data-value="dados" />
+                                <span class="text-sm text-text-secondary ml-2">Análise de Dados</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Difficulty Filter -->
+                    <div class="mb-6">
+                        <button type="button" class="filter-section-toggle w-full flex items-center justify-between py-2 text-left" data-target="difficultyFilter">
+                            <span class="font-medium text-text-primary">Dificuldade</span>
+                            <i class="fas fa-chevron-down text-secondary-400 transition-transform"></i>
+                        </button>
+                        <div id="difficultyFilter" class="mt-3 space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox" data-filter="difficulty" data-value="iniciante" />
+                                <span class="text-sm text-text-secondary ml-2">Iniciante</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox" data-filter="difficulty" data-value="intermediario" />
+                                <span class="text-sm text-text-secondary ml-2">Intermediário</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox" data-filter="difficulty" data-value="avancado" />
+                                <span class="text-sm text-text-secondary ml-2">Avançado</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Deadline Filter -->
+                    <div class="mb-6">
+                        <button type="button" class="filter-section-toggle w-full flex items-center justify-between py-2 text-left" data-target="deadlineFilter">
+                            <span class="font-medium text-text-primary">Prazo</span>
+                            <i class="fas fa-chevron-down text-secondary-400 transition-transform"></i>
+                        </button>
+                        <div id="deadlineFilter" class="mt-3 space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox" data-filter="deadline" data-value="7-days" />
+                                <span class="text-sm text-text-secondary ml-2">Próximos 7 dias</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox" data-filter="deadline" data-value="30-days" />
+                                <span class="text-sm text-text-secondary ml-2">Próximos 30 dias</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox" data-filter="deadline" data-value="no-deadline" />
+                                <span class="text-sm text-text-secondary ml-2">Sem prazo definido</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Challenge Grid -->
+            <div class="flex-1">
+                <div id="challengeGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    <!-- Challenge Card 1 -->
+                    <div class="challenge-card bg-surface rounded-lg shadow-elevation-sm border border-secondary-200 overflow-hidden hover:shadow-elevation-md transition-all duration-200 cursor-pointer" onclick="window.location.href='challenge_detail_and_response_submission.html'">
+                        <div class="p-6">
+                            <!-- Company Header -->
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=2126&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="TechCorp Brasil" class="w-10 h-10 rounded-lg object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                    <div>
+                                        <h3 class="font-semibold text-text-primary text-sm">TechCorp Brasil</h3>
+                                        <p class="text-xs text-text-secondary">Tecnologia</p>
+                                    </div>
+                                </div>
+                                <button type="button" class="bookmark-btn p-2 text-secondary-400 hover:text-error transition-colors" onclick="event.stopPropagation(); toggleBookmark(this)">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+
+                            <!-- Challenge Title -->
+                            <h4 class="text-lg font-semibold text-text-primary mb-3 line-clamp-2">
+                                Desenvolvimento de API REST para E-commerce
+                            </h4>
+
+                            <!-- Challenge Preview -->
+                            <p class="text-sm text-text-secondary mb-4 line-clamp-3">
+                                Desenvolva uma API REST completa para um sistema de e-commerce, incluindo autenticação, gerenciamento de produtos e processamento de pedidos.
+                            </p>
+
+                            <!-- Challenge Meta -->
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center space-x-4">
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-accent-50 text-accent-700">
+                                        <i class="fas fa-signal mr-1"></i>
+                                        Intermediário
+                                    </span>
+                                    <span class="text-xs text-text-secondary">
+                                        <i class="fas fa-users mr-1"></i>
+                                        12 candidatos
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Deadline -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-xs text-text-secondary">
+                                    <i class="fas fa-clock mr-1"></i>
+                                    Prazo: 15/08/2025
+                                </div>
+                                <span class="text-xs text-warning font-medium">
+                                    5 dias restantes
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Action Footer -->
+                        <div class="px-6 py-4 bg-secondary-50 border-t border-secondary-100">
+                            <button class="w-full bg-primary text-white py-2 px-4 rounded-md text-sm font-medium hover:bg-primary-700 transition-colors">
+                                Ver Detalhes
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Challenge Card 2 -->
+                    <div class="challenge-card bg-surface rounded-lg shadow-elevation-sm border border-secondary-200 overflow-hidden hover:shadow-elevation-md transition-all duration-200 cursor-pointer" onclick="window.location.href='challenge_detail_and_response_submission.html'">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Innovate Solutions" class="w-10 h-10 rounded-lg object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                    <div>
+                                        <h3 class="font-semibold text-text-primary text-sm">Innovate Solutions</h3>
+                                        <p class="text-xs text-text-secondary">Consultoria</p>
+                                    </div>
+                                </div>
+                                <button type="button" class="bookmark-btn p-2 text-error" onclick="event.stopPropagation(); toggleBookmark(this)">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+
+                            <h4 class="text-lg font-semibold text-text-primary mb-3 line-clamp-2">
+                                Interface de Dashboard Analytics
+                            </h4>
+
+                            <p class="text-sm text-text-secondary mb-4 line-clamp-3">
+                                Crie uma interface moderna e responsiva para dashboard de analytics com gráficos interativos e visualização de dados em tempo real.
+                            </p>
+
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center space-x-4">
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary-50 text-primary-700">
+                                        <i class="fas fa-signal mr-1"></i>
+                                        Iniciante
+                                    </span>
+                                    <span class="text-xs text-text-secondary">
+                                        <i class="fas fa-users mr-1"></i>
+                                        8 candidatos
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-xs text-text-secondary">
+                                    <i class="fas fa-clock mr-1"></i>
+                                    Prazo: 22/08/2025
+                                </div>
+                                <span class="text-xs text-success font-medium">
+                                    12 dias restantes
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="px-6 py-4 bg-secondary-50 border-t border-secondary-100">
+                            <button class="w-full bg-primary text-white py-2 px-4 rounded-md text-sm font-medium hover:bg-primary-700 transition-colors">
+                                Ver Detalhes
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Challenge Card 3 -->
+                    <div class="challenge-card bg-surface rounded-lg shadow-elevation-sm border border-secondary-200 overflow-hidden hover:shadow-elevation-md transition-all duration-200 cursor-pointer" onclick="window.location.href='challenge_detail_and_response_submission.html'">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://images.pixabay.com/photo/2016/12/30/10/03/office-1940733_1280.jpg" alt="Digital Ventures" class="w-10 h-10 rounded-lg object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                    <div>
+                                        <h3 class="font-semibold text-text-primary text-sm">Digital Ventures</h3>
+                                        <p class="text-xs text-text-secondary">Startup</p>
+                                    </div>
+                                </div>
+                                <button type="button" class="bookmark-btn p-2 text-secondary-400 hover:text-error transition-colors" onclick="event.stopPropagation(); toggleBookmark(this)">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+
+                            <h4 class="text-lg font-semibold text-text-primary mb-3 line-clamp-2">
+                                Estratégia de Marketing Digital
+                            </h4>
+
+                            <p class="text-sm text-text-secondary mb-4 line-clamp-3">
+                                Desenvolva uma estratégia completa de marketing digital para lançamento de produto, incluindo análise de mercado e plano de execução.
+                            </p>
+
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center space-x-4">
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-warning/10 text-warning">
+                                        <i class="fas fa-signal mr-1"></i>
+                                        Avançado
+                                    </span>
+                                    <span class="text-xs text-text-secondary">
+                                        <i class="fas fa-users mr-1"></i>
+                                        15 candidatos
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-xs text-text-secondary">
+                                    <i class="fas fa-clock mr-1"></i>
+                                    Prazo: 30/08/2025
+                                </div>
+                                <span class="text-xs text-success font-medium">
+                                    20 dias restantes
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="px-6 py-4 bg-secondary-50 border-t border-secondary-100">
+                            <button class="w-full bg-primary text-white py-2 px-4 rounded-md text-sm font-medium hover:bg-primary-700 transition-colors">
+                                Ver Detalhes
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Loading Skeleton Cards -->
+                    <div id="loadingSkeletons" class="hidden contents">
+                        <div class="bg-surface rounded-lg shadow-elevation-sm border border-secondary-200 overflow-hidden">
+                            <div class="p-6">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <div class="skeleton w-10 h-10 rounded-lg"></div>
+                                    <div class="flex-1">
+                                        <div class="skeleton-text w-24 mb-1"></div>
+                                        <div class="skeleton-text w-16"></div>
+                                    </div>
+                                </div>
+                                <div class="skeleton-text w-full mb-2"></div>
+                                <div class="skeleton-text w-3/4 mb-4"></div>
+                                <div class="skeleton-text w-full mb-2"></div>
+                                <div class="skeleton-text w-2/3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="text-center mt-8">
+                    <button id="loadMoreBtn" class="bg-primary text-white px-6 py-3 rounded-md font-medium hover:bg-primary-700 transition-colors">
+                        Carregar Mais Desafios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Filter Panel -->
+    <div id="mobileFilterPanel" class="fixed inset-0 z-50 lg:hidden hidden">
+        <div class="fixed inset-0 bg-black bg-opacity-50" onclick="closeMobileFilters()"></div>
+        <div class="fixed bottom-0 left-0 right-0 bg-surface rounded-t-lg max-h-[80vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold text-text-primary">Filtros</h3>
+                    <button type="button" onclick="closeMobileFilters()" class="p-2 text-secondary-400 hover:text-secondary-600 transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile filter content (same as desktop) -->
+                <div class="space-y-6">
+                    <!-- Company Filter -->
+                    <div>
+                        <h4 class="font-medium text-text-primary mb-3">Empresa</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox mr-2" />
+                                <span class="text-sm text-text-secondary">TechCorp Brasil</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox mr-2" />
+                                <span class="text-sm text-text-secondary">Innovate Solutions</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox mr-2" />
+                                <span class="text-sm text-text-secondary">Digital Ventures</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div>
+                        <h4 class="font-medium text-text-primary mb-3">Categoria</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox mr-2" />
+                                <span class="text-sm text-text-secondary">Desenvolvimento</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox mr-2" />
+                                <span class="text-sm text-text-secondary">Design</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="filter-checkbox mr-2" />
+                                <span class="text-sm text-text-secondary">Marketing</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Apply Filters Button -->
+                <div class="mt-6 pt-6 border-t border-secondary-200">
+                    <button onclick="applyMobileFilters()" class="w-full bg-primary text-white py-3 px-4 rounded-md font-medium hover:bg-primary-700 transition-colors">
+                        Aplicar Filtros
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-secondary-200 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-sm text-text-secondary">
+                <p>© 2025 TCC Innovation. Todos os direitos reservados.</p>
+                <div class="mt-2 space-x-4">
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors">Termos de Uso</a>
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors">Política de Privacidade</a>
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors">Suporte</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const clearSearch = document.getElementById('clearSearch');
+        const searchSuggestions = document.getElementById('searchSuggestions');
+        const suggestionsList = document.getElementById('suggestionsList');
+
+        const mockSuggestions = [
+            'Desenvolvimento Web',
+            'React.js',
+            'Node.js',
+            'Python',
+            'Design UI/UX',
+            'Marketing Digital',
+            'Análise de Dados',
+            'Machine Learning'
+        ];
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            
+            if (query.length > 0) {
+                clearSearch.classList.remove('hidden');
+                showSuggestions(query);
+            } else {
+                clearSearch.classList.add('hidden');
+                hideSuggestions();
+            }
+        });
+
+        clearSearch.addEventListener('click', function() {
+            searchInput.value = '';
+            clearSearch.classList.add('hidden');
+            hideSuggestions();
+            searchInput.focus();
+        });
+
+        function showSuggestions(query) {
+            const filtered = mockSuggestions.filter(item => 
+                item.toLowerCase().includes(query.toLowerCase())
+            );
+
+            if (filtered.length > 0) {
+                suggestionsList.innerHTML = filtered.map(item => 
+                    `<div class="px-2 py-2 text-sm text-text-primary hover:bg-secondary-50 cursor-pointer rounded" onclick="selectSuggestion('${item}')">${item}</div>`
+                ).join('');
+                searchSuggestions.classList.remove('hidden');
+            } else {
+                hideSuggestions();
+            }
+        }
+
+        function hideSuggestions() {
+            searchSuggestions.classList.add('hidden');
+        }
+
+        function selectSuggestion(suggestion) {
+            searchInput.value = suggestion;
+            hideSuggestions();
+            clearSearch.classList.remove('hidden');
+        }
+
+        // Click outside to hide suggestions
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
+                hideSuggestions();
+            }
+        });
+
+        // User menu dropdown
+        const userMenuButton = document.getElementById('userMenuButton');
+        const userDropdown = document.getElementById('userDropdown');
+
+        userMenuButton.addEventListener('click', function() {
+            userDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!userMenuButton.contains(e.target) && !userDropdown.contains(e.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
+
+        // Filter functionality
+        const filterToggle = document.getElementById('filterToggle');
+        const mobileFilterPanel = document.getElementById('mobileFilterPanel');
+        const activeFilters = document.getElementById('activeFilters');
+
+        filterToggle.addEventListener('click', function() {
+            mobileFilterPanel.classList.remove('hidden');
+        });
+
+        function closeMobileFilters() {
+            mobileFilterPanel.classList.add('hidden');
+        }
+
+        function applyMobileFilters() {
+            closeMobileFilters();
+            updateActiveFilters();
+        }
+
+        // Filter section toggles
+        document.querySelectorAll('.filter-section-toggle').forEach(button => {
+            button.addEventListener('click', function() {
+                const target = document.getElementById(this.dataset.target);
+                const icon = this.querySelector('i');
+                
+                target.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Filter checkboxes
+        document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', updateActiveFilters);
+        });
+
+        function updateActiveFilters() {
+            const checkedFilters = document.querySelectorAll('.filter-checkbox:checked');
+            activeFilters.innerHTML = '';
+
+            checkedFilters.forEach(filter => {
+                const filterType = filter.dataset.filter;
+                const filterValue = filter.dataset.value;
+                const filterLabel = filter.nextElementSibling.textContent;
+
+                const chip = document.createElement('div');
+                chip.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary-50 text-primary-700';
+                chip.innerHTML = `
+                    ${filterLabel}
+                    <button type="button" class="ml-2 text-primary-500 hover:text-primary-700" onclick="removeFilter('${filterType}', '${filterValue}')">
+                        <i class="fas fa-times text-xs"></i>
+                    </button>
+                `;
+                activeFilters.appendChild(chip);
+            });
+
+            // Update results count
+            updateResultsCount();
+        }
+
+        function removeFilter(filterType, filterValue) {
+            const checkbox = document.querySelector(`[data-filter="${filterType}"][data-value="${filterValue}"]`);
+            if (checkbox) {
+                checkbox.checked = false;
+                updateActiveFilters();
+            }
+        }
+
+        function updateResultsCount() {
+            const count = Math.floor(Math.random() * 50) + 10;
+            document.getElementById('resultsCount').textContent = count;
+        }
+
+        // Clear all filters
+        document.getElementById('clearAllFilters').addEventListener('click', function() {
+            document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            updateActiveFilters();
+        });
+
+        // Bookmark functionality
+        function toggleBookmark(button) {
+            const icon = button.querySelector('i');
+            if (icon.classList.contains('far')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                button.classList.remove('text-secondary-400');
+                button.classList.add('text-error');
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                button.classList.remove('text-error');
+                button.classList.add('text-secondary-400');
+            }
+        }
+
+        // Sort functionality
+        document.getElementById('sortSelect').addEventListener('change', function() {
+            // Simulate sorting
+            console.log('Sorting by:', this.value);
+        });
+
+        // Load more functionality
+        document.getElementById('loadMoreBtn').addEventListener('click', function() {
+            const loadingSkeletons = document.getElementById('loadingSkeletons');
+            const button = this;
+            
+            // Show loading state
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Carregando...';
+            loadingSkeletons.classList.remove('hidden');
+            
+            // Simulate loading
+            setTimeout(() => {
+                loadingSkeletons.classList.add('hidden');
+                button.disabled = false;
+                button.innerHTML = 'Carregar Mais Desafios';
+                
+                // In a real app, you would append new challenge cards here
+                console.log('Loading more challenges...');
+            }, 2000);
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateActiveFilters();
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalhes do Desafio - TCC Innovation</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ftccinnova5019back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Header -->
+    <header class="bg-surface shadow-elevation-sm border-b border-secondary-200 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Left Section -->
+                <div class="flex items-center space-x-4">
+                    <!-- Back Button -->
+                    <button onclick="window.history.back()" class="p-2 hover:bg-secondary-100 rounded-lg transition-colors">
+                        <i class="fas fa-arrow-left text-secondary-600"></i>
+                    </button>
+                    
+                    <!-- Logo -->
+                    <a href="challenge_browse_and_search.html" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-semibold text-text-primary hidden sm:block">TCC Innovation</span>
+                    </a>
+                </div>
+
+                <!-- Right Section -->
+                <div class="flex items-center space-x-2">
+                    <!-- Bookmark Button -->
+                    <button id="bookmarkBtn" onclick="toggleBookmark()" class="p-2 hover:bg-secondary-100 rounded-lg transition-colors">
+                        <i class="far fa-bookmark text-secondary-600" id="bookmarkIcon"></i>
+                    </button>
+                    
+                    <!-- Share Button -->
+                    <button onclick="shareChallenge()" class="p-2 hover:bg-secondary-100 rounded-lg transition-colors">
+                        <i class="fas fa-share-alt text-secondary-600"></i>
+                    </button>
+                    
+                    <!-- Profile Menu -->
+                    <div class="relative">
+                        <button onclick="toggleProfileMenu()" class="flex items-center space-x-2 p-2 hover:bg-secondary-100 rounded-lg transition-colors">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Perfil" class="w-8 h-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <i class="fas fa-chevron-down text-xs text-secondary-400"></i>
+                        </button>
+                        
+                        <!-- Profile Dropdown -->
+                        <div id="profileMenu" class="hidden absolute right-0 mt-2 w-48 bg-surface rounded-lg shadow-elevation-lg border border-secondary-200 py-2">
+                            <a href="user_profile_management.html" class="flex items-center px-4 py-2 text-sm text-text-secondary hover:bg-secondary-50 transition-colors">
+                                <i class="fas fa-user mr-3"></i>
+                                Meu Perfil
+                            </a>
+                            <a href="challenge_browse_and_search.html" class="flex items-center px-4 py-2 text-sm text-text-secondary hover:bg-secondary-50 transition-colors">
+                                <i class="fas fa-search mr-3"></i>
+                                Buscar Desafios
+                            </a>
+                            <hr class="my-2 border-secondary-200" />
+                            <a href="login_screen.html" class="flex items-center px-4 py-2 text-sm text-error hover:bg-red-50 transition-colors">
+                                <i class="fas fa-sign-out-alt mr-3"></i>
+                                Sair
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="bg-surface border-b border-secondary-200 py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-2 text-sm">
+                <a href="challenge_browse_and_search.html" class="text-primary hover:text-primary-700 transition-colors">
+                    Desafios
+                </a>
+                <i class="fas fa-chevron-right text-secondary-400 text-xs"></i>
+                <a href="javascript:void(0)" class="text-primary hover:text-primary-700 transition-colors">
+                    Tecnologia
+                </a>
+                <i class="fas fa-chevron-right text-secondary-400 text-xs"></i>
+                <span class="text-text-secondary">Sistema de Gestão Acadêmica</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+            <!-- Challenge Details - Left Column -->
+            <div class="lg:col-span-8 space-y-6">
+                <!-- Company Header -->
+                <div class="bg-surface rounded-lg shadow-elevation-sm border border-secondary-200 p-6">
+                    <div class="flex items-start space-x-4">
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=2926&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="TechCorp Solutions" class="w-16 h-16 rounded-lg object-cover border border-secondary-200" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        <div class="flex-1">
+                            <h1 class="text-fluid-2xl font-bold text-text-primary mb-2">
+                                Sistema de Gestão Acadêmica
+                            </h1>
+                            <div class="flex items-center space-x-4 text-sm text-text-secondary mb-3">
+                                <span class="font-medium text-primary">TechCorp Solutions</span>
+                                <span class="flex items-center">
+                                    <i class="fas fa-map-marker-alt mr-1"></i>
+                                    São Paulo, SP
+                                </span>
+                                <span class="flex items-center">
+                                    <i class="fas fa-building mr-1"></i>
+                                    Tecnologia
+                                </span>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent-50 text-accent-700">
+                                    <i class="fas fa-circle text-accent-500 text-xs mr-2"></i>
+                                    Ativo
+                                </span>
+                                <span class="text-sm text-text-secondary">
+                                    <i class="fas fa-clock mr-1"></i>
+                                    Publicado há 2 dias
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Challenge Description -->
+                <div class="bg-surface rounded-lg shadow-elevation-sm border border-secondary-200 p-6">
+                    <h2 class="text-fluid-xl font-semibold text-text-primary mb-4">Descrição do Desafio</h2>
+                    <div class="prose prose-sm max-w-none text-text-secondary">
+                        <p class="mb-4">
+                            Desenvolva um sistema de gestão acadêmica completo que permita o controle de alunos, professores, disciplinas e notas. 
+                            O sistema deve ser intuitivo, responsivo e seguir as melhores práticas de desenvolvimento web.
+                        </p>
+                        <p class="mb-4">
+                            Este desafio visa avaliar suas habilidades em desenvolvimento full-stack, design de banco de dados, 
+                            interface de usuário e experiência do usuário. Você terá a oportunidade de demonstrar conhecimentos 
+                            em tecnologias modernas e metodologias ágeis.
+                        </p>
+                        <p>
+                            O projeto final deve incluir documentação técnica, testes automatizados e deploy em ambiente de produção.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Requirements Section -->
+                <div class="bg-surface rounded-lg shadow-elevation-sm border border-secondary-200">
+                    <button onclick="toggleSection('requirements')" class="w-full flex items-center justify-between p-6 text-left">
+                        <h2 class="text-fluid-xl font-semibold text-text-primary">Requisitos Técnicos</h2>
+                        <i class="fas fa-chevron-down text-secondary-400 transition-transform" id="requirementsIcon"></i>
+                    </button>
+                    <div id="requirementsContent" class="px-6 pb-6">
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="font-medium text-text-primary mb-2">Frontend</h3>
+                                <ul class="list-disc list-inside text-text-secondary space-y-1 text-sm">
+                                    <li>React.js ou Vue.js para interface de usuário</li>
+                                    <li>Design responsivo com CSS3 ou framework CSS</li>
+                                    <li>Integração com APIs REST</li>
+                                    <li>Validação de formulários client-side</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-text-primary mb-2">Backend</h3>
+                                <ul class="list-disc list-inside text-text-secondary space-y-1 text-sm">
+                                    <li>Node.js com Express ou Python com Django/Flask</li>
+                                    <li>API RESTful com documentação</li>
+                                    <li>Autenticação e autorização</li>
+                                    <li>Validação de dados server-side</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-text-primary mb-2">Banco de Dados</h3>
+                                <ul class="list-disc list-inside text-text-secondary space-y-1 text-sm">
+                                    <li>PostgreSQL ou MySQL</li>
+                                    <li>Modelagem relacional adequada</li>
+                                    <li>Migrations e seeds</li>
+                                    <li>Índices para otimização</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Evaluation Criteria -->
+                <div class="bg-surface rounded-lg shadow-elevation-sm border border-secondary-200">
+                    <button onclick="toggleSection('criteria')" class="w-full flex items-center justify-between p-6 text-left">
+                        <h2 class="text-fluid-xl font-semibold text-text-primary">Critérios de Avaliação</h2>
+                        <i class="fas fa-chevron-down text-secondary-400 transition-transform" id="criteriaIcon"></i>
+                    </button>
+                    <div id="criteriaContent" class="hidden px-6 pb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-primary-50 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-code text-primary text-sm"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-text-primary">Qualidade do Código</h3>
+                                    <p class="text-sm text-text-secondary">25 pontos</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-accent-50 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-mobile-alt text-accent text-sm"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-text-primary">Responsividade</h3>
+                                    <p class="text-sm text-text-secondary">20 pontos</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-warning/10 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-database text-warning text-sm"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-text-primary">Arquitetura</h3>
+                                    <p class="text-sm text-text-secondary">25 pontos</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-error/10 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-vial text-error text-sm"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-text-primary">Testes</h3>
+                                    <p class="text-sm text-text-secondary">15 pontos</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-secondary-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-file-alt text-secondary-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-text-primary">Documentação</h3>
+                                    <p class="text-sm text-text-secondary">15 pontos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deadline Info -->
+                <div class="bg-surface rounded-lg shadow-elevation-sm border border-secondary-200 p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-fluid-xl font-semibold text-text-primary mb-2">Prazo de Entrega</h2>
+                            <p class="text-text-secondary">15 de Agosto de 2025, 23:59</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold text-warning" id="countdown">12d 5h 30m</div>
+                            <p class="text-sm text-text-secondary">Tempo restante</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-secondary-100 rounded-full h-2">
+                        <div class="bg-warning h-2 rounded-full" style="width: 65%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submission Form - Right Column -->
+            <div class="lg:col-span-4 mt-6 lg:mt-0">
+                <div class="lg:sticky lg:top-24">
+                    <div class="bg-surface rounded-lg shadow-elevation-sm border border-secondary-200 p-6">
+                        <h2 class="text-fluid-xl font-semibold text-text-primary mb-6">Enviar Resposta</h2>
+                        
+                        <!-- Progress Indicator -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between text-sm text-text-secondary mb-2">
+                                <span>Progresso</span>
+                                <span id="progressText">0%</span>
+                            </div>
+                            <div class="bg-secondary-100 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full transition-all duration-300" style="width: 0%" id="progressBar"></div>
+                            </div>
+                        </div>
+
+                        <!-- Submission Form -->
+                        <form id="submissionForm" class="space-y-6">
+                            <!-- Response Text -->
+                            <div>
+                                <label for="response" class="block text-sm font-medium text-text-primary mb-2">
+                                    Sua Resposta *
+                                </label>
+                                <textarea id="response" name="response" rows="8" required class="form-input w-full resize-none" placeholder="Descreva sua abordagem para resolver este desafio..." oninput="updateProgress(); autoSave()"></textarea>
+                                <div class="flex justify-between text-xs text-text-secondary mt-1">
+                                    <span id="charCount">0 caracteres</span>
+                                    <span>Mínimo: 500 caracteres</span>
+                                </div>
+                                <div class="validation-message validation-error" id="responseError">
+                                    A resposta deve ter pelo menos 500 caracteres
+                                </div>
+                            </div>
+
+                            <!-- File Attachments -->
+                            <div>
+                                <label class="block text-sm font-medium text-text-primary mb-2">
+                                    Anexos (Opcional)
+                                </label>
+                                <div id="dropZone" class="border-2 border-dashed border-secondary-300 rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" onclick="document.getElementById('fileInput').click()">
+                                    <i class="fas fa-cloud-upload-alt text-3xl text-secondary-400 mb-2"></i>
+                                    <p class="text-sm text-text-secondary mb-1">
+                                        Arraste arquivos aqui ou clique para selecionar
+                                    </p>
+                                    <p class="text-xs text-text-secondary">
+                                        PDF, DOC, ZIP até 10MB
+                                    </p>
+                                </div>
+                                <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.zip,.rar" class="hidden" onchange="handleFileSelect(event)" />
+                                
+                                <!-- File List -->
+                                <div id="fileList" class="mt-3 space-y-2"></div>
+                            </div>
+
+                            <!-- Portfolio URL -->
+                            <div>
+                                <label for="portfolioUrl" class="block text-sm font-medium text-text-primary mb-2">
+                                    Link do Portfólio/GitHub (Opcional)
+                                </label>
+                                <input type="url" id="portfolioUrl" name="portfolioUrl" class="form-input w-full" placeholder="https://github.com/seu-usuario/projeto" />
+                            </div>
+
+                            <!-- Auto-save Status -->
+                            <div class="flex items-center text-xs text-text-secondary">
+                                <i class="fas fa-save mr-1"></i>
+                                <span id="autoSaveStatus">Rascunho salvo automaticamente</span>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" id="submitBtn" class="w-full bg-primary text-white py-3 px-4 rounded-lg font-medium hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                                <span id="submitBtnText">Enviar Resposta</span>
+                                <div class="hidden" id="submitSpinner">
+                                    <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>
+                                </div>
+                            </button>
+
+                            <!-- Draft Button -->
+                            <button type="button" onclick="saveDraft()" class="w-full bg-secondary-100 text-text-secondary py-2 px-4 rounded-lg font-medium hover:bg-secondary-200 transition-colors">
+                                <i class="fas fa-save mr-2"></i>
+                                Salvar Rascunho
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-surface rounded-lg shadow-elevation-lg max-w-md w-full p-6">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-paper-plane text-2xl text-primary"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-text-primary mb-2">Confirmar Envio</h3>
+                <p class="text-text-secondary mb-6">
+                    Tem certeza que deseja enviar sua resposta? Esta ação não pode ser desfeita.
+                </p>
+                <div class="flex space-x-3">
+                    <button onclick="closeConfirmationModal()" class="flex-1 bg-secondary-100 text-text-secondary py-2 px-4 rounded-lg font-medium hover:bg-secondary-200 transition-colors">
+                        Cancelar
+                    </button>
+                    <button onclick="confirmSubmission()" class="flex-1 bg-primary text-white py-2 px-4 rounded-lg font-medium hover:bg-primary-700 transition-colors">
+                        Confirmar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-surface rounded-lg shadow-elevation-lg max-w-md w-full p-6">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-accent-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-2xl text-accent"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-text-primary mb-2">Resposta Enviada!</h3>
+                <p class="text-text-secondary mb-6">
+                    Sua resposta foi enviada com sucesso. A empresa avaliará sua submissão e você receberá feedback em até 7 dias úteis.
+                </p>
+                <div class="space-y-3">
+                    <button onclick="window.location.href='challenge_browse_and_search.html'" class="w-full bg-primary text-white py-2 px-4 rounded-lg font-medium hover:bg-primary-700 transition-colors">
+                        Ver Outros Desafios
+                    </button>
+                    <button onclick="window.location.href='user_profile_management.html'" class="w-full bg-secondary-100 text-text-secondary py-2 px-4 rounded-lg font-medium hover:bg-secondary-200 transition-colors">
+                        Ver Minhas Submissões
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Sticky Submission Panel -->
+    <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-secondary-200 p-4 z-30">
+        <button onclick="scrollToSubmission()" class="w-full bg-primary text-white py-3 px-4 rounded-lg font-medium hover:bg-primary-700 transition-colors">
+            <i class="fas fa-paper-plane mr-2"></i>
+            Enviar Resposta
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-secondary-200 py-6 mt-12 mb-20 lg:mb-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-sm text-text-secondary">
+                <p>© 2025 TCC Innovation. Todos os direitos reservados.</p>
+                <div class="mt-2 space-x-4">
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors">Termos de Uso</a>
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors">Política de Privacidade</a>
+                    <a href="javascript:void(0)" class="hover:text-primary transition-colors">Suporte</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let isBookmarked = false;
+        let selectedFiles = [];
+        let autoSaveTimer;
+
+        // Profile menu toggle
+        function toggleProfileMenu() {
+            const menu = document.getElementById('profileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Close profile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('profileMenu');
+            const button = event.target.closest('button');
+            if (!button || !button.onclick || button.onclick.toString().indexOf('toggleProfileMenu') === -1) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        // Bookmark functionality
+        function toggleBookmark() {
+            const icon = document.getElementById('bookmarkIcon');
+            isBookmarked = !isBookmarked;
+            
+            if (isBookmarked) {
+                icon.classList.remove('far');
+                icon.classList.add('fas', 'text-warning');
+            } else {
+                icon.classList.remove('fas', 'text-warning');
+                icon.classList.add('far');
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('bookmark_challenge_1', isBookmarked);
+        }
+
+        // Share functionality
+        function shareChallenge() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Sistema de Gestão Acadêmica - TCC Innovation',
+                    text: 'Confira este desafio interessante na TCC Innovation',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback - copy to clipboard
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Link copiado para a área de transferência!');
+                });
+            }
+        }
+
+        // Toggle expandable sections
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + 'Content');
+            const icon = document.getElementById(sectionId + 'Icon');
+            
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Countdown timer
+        function updateCountdown() {
+            const deadline = new Date('2025-08-15T23:59:59');
+            const now = new Date();
+            const diff = deadline - now;
+            
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                
+                document.getElementById('countdown').textContent = `${days}d ${hours}h ${minutes}m`;
+            } else {
+                document.getElementById('countdown').textContent = 'Prazo expirado';
+            }
+        }
+
+        // Update progress based on form completion
+        function updateProgress() {
+            const response = document.getElementById('response').value;
+            const charCount = response.length;
+            const minChars = 500;
+            
+            // Update character count
+            document.getElementById('charCount').textContent = `${charCount} caracteres`;
+            
+            // Calculate progress
+            let progress = 0;
+            if (charCount >= minChars) progress += 80;
+            else progress += Math.min(80, (charCount / minChars) * 80);
+            
+            if (selectedFiles.length > 0) progress += 10;
+            if (document.getElementById('portfolioUrl').value) progress += 10;
+            
+            // Update progress bar
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('progressText').textContent = `${Math.round(progress)}%`;
+            
+            // Enable/disable submit button
+            const submitBtn = document.getElementById('submitBtn');
+            if (charCount >= minChars) {
+                submitBtn.disabled = false;
+                document.getElementById('responseError').classList.remove('show');
+            } else {
+                submitBtn.disabled = true;
+                if (charCount > 0) {
+                    document.getElementById('responseError').classList.add('show');
+                }
+            }
+        }
+
+        // Auto-save functionality
+        function autoSave() {
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(() => {
+                const formData = {
+                    response: document.getElementById('response').value,
+                    portfolioUrl: document.getElementById('portfolioUrl').value,
+                    timestamp: new Date().toISOString()
+                };
+                
+                localStorage.setItem('draft_challenge_1', JSON.stringify(formData));
+                document.getElementById('autoSaveStatus').textContent = 'Rascunho salvo automaticamente';
+            }, 2000);
+        }
+
+        // Save draft manually
+        function saveDraft() {
+            const formData = {
+                response: document.getElementById('response').value,
+                portfolioUrl: document.getElementById('portfolioUrl').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('draft_challenge_1', JSON.stringify(formData));
+            document.getElementById('autoSaveStatus').textContent = 'Rascunho salvo manualmente';
+            
+            // Show success feedback
+            const originalText = document.getElementById('autoSaveStatus').textContent;
+            document.getElementById('autoSaveStatus').textContent = 'Rascunho salvo com sucesso!';
+            setTimeout(() => {
+                document.getElementById('autoSaveStatus').textContent = originalText;
+            }, 2000);
+        }
+
+        // Load draft on page load
+        function loadDraft() {
+            const draft = localStorage.getItem('draft_challenge_1');
+            if (draft) {
+                const formData = JSON.parse(draft);
+                document.getElementById('response').value = formData.response || '';
+                document.getElementById('portfolioUrl').value = formData.portfolioUrl || '';
+                updateProgress();
+            }
+        }
+
+        // File handling
+        function handleDragOver(event) {
+            event.preventDefault();
+            document.getElementById('dropZone').classList.add('border-primary', 'bg-primary-50');
+        }
+
+        function handleDragLeave(event) {
+            event.preventDefault();
+            document.getElementById('dropZone').classList.remove('border-primary', 'bg-primary-50');
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            document.getElementById('dropZone').classList.remove('border-primary', 'bg-primary-50');
+            
+            const files = Array.from(event.dataTransfer.files);
+            addFiles(files);
+        }
+
+        function handleFileSelect(event) {
+            const files = Array.from(event.target.files);
+            addFiles(files);
+        }
+
+        function addFiles(files) {
+            files.forEach(file => {
+                if (file.size <= 10 * 1024 * 1024) { // 10MB limit
+                    selectedFiles.push(file);
+                    addFileToList(file);
+                } else {
+                    alert(`Arquivo ${file.name} é muito grande. Limite: 10MB`);
+                }
+            });
+            updateProgress();
+        }
+
+        function addFileToList(file) {
+            const fileList = document.getElementById('fileList');
+            const fileItem = document.createElement('div');
+            fileItem.className = 'flex items-center justify-between p-3 bg-secondary-50 rounded-lg';
+            fileItem.innerHTML = `
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-file text-secondary-600"></i>
+                    <div>
+                        <p class="text-sm font-medium text-text-primary">${file.name}</p>
+                        <p class="text-xs text-text-secondary">${(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                    </div>
+                </div>
+                <button onclick="removeFile('${file.name}')" class="text-error hover:text-red-700 transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            fileList.appendChild(fileItem);
+        }
+
+        function removeFile(fileName) {
+            selectedFiles = selectedFiles.filter(file => file.name !== fileName);
+            const fileList = document.getElementById('fileList');
+            const fileItems = fileList.children;
+            
+            for (let i = 0; i < fileItems.length; i++) {
+                if (fileItems[i].textContent.includes(fileName)) {
+                    fileItems[i].remove();
+                    break;
+                }
+            }
+            updateProgress();
+        }
+
+        // Form submission
+        document.getElementById('submissionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('confirmationModal').classList.remove('hidden');
+        });
+
+        function closeConfirmationModal() {
+            document.getElementById('confirmationModal').classList.add('hidden');
+        }
+
+        function confirmSubmission() {
+            const submitBtn = document.getElementById('submitBtn');
+            const submitBtnText = document.getElementById('submitBtnText');
+            const submitSpinner = document.getElementById('submitSpinner');
+            
+            // Show loading state
+            submitBtnText.classList.add('hidden');
+            submitSpinner.classList.remove('hidden');
+            submitBtn.disabled = true;
+            
+            // Simulate submission
+            setTimeout(() => {
+                document.getElementById('confirmationModal').classList.add('hidden');
+                document.getElementById('successModal').classList.remove('hidden');
+                
+                // Clear draft
+                localStorage.removeItem('draft_challenge_1');
+                
+                // Reset form
+                document.getElementById('submissionForm').reset();
+                selectedFiles = [];
+                document.getElementById('fileList').innerHTML = '';
+                updateProgress();
+                
+                // Reset button state
+                submitBtnText.classList.remove('hidden');
+                submitSpinner.classList.add('hidden');
+                submitBtn.disabled = false;
+            }, 2000);
+        }
+
+        // Mobile scroll to submission
+        function scrollToSubmission() {
+            document.querySelector('.lg\\:col-span-4').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDraft();
+            updateCountdown();
+            setInterval(updateCountdown, 60000); // Update every minute
+            
+            // Load bookmark state
+            const bookmarkState = localStorage.getItem('bookmark_challenge_1');
+            if (bookmarkState === 'true') {
+                toggleBookmark();
+            }
+            
+            // Add input listeners
+            document.getElementById('response').addEventListener('input', updateProgress);
+            document.getElementById('portfolioUrl').addEventListener('input', updateProgress);
+        });
+
+        // Offline capability
+        window.addEventListener('online', function() {
+            document.getElementById('autoSaveStatus').textContent = 'Conectado - Rascunho sincronizado';
+        });
+
+        window.addEventListener('offline', function() {
+            document.getElementById('autoSaveStatus').textContent = 'Offline - Rascunho salvo localmente';
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
